@@ -1,0 +1,56 @@
+<!-- 模态框（Modal） -->
+<div class="modal fade " style="width:800px;display:none !important" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog " >
+    <div class="modal-content " >
+      <div class="modal-header ">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          权限管理
+        </h4>
+      </div>
+      <div class="modal-body">
+          <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+              <h5>添加权限</h5>
+            </div>
+            <div class="widget-content nopadding">
+              <form class="form-horizontal" action="/adminlists/insert" method="post"  name="basic_validate" id="basic_validate" novalidate="novalidate">
+                <div class="control-group">
+                  <label class="control-label">权限名</label>
+                  <div class="controls">
+                    <input type="text" name="name" id="name">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">控制器</label>
+                  <div class="controls">
+                    <input type="text" name="mname" id="mname" placeholder="请输入英文组合">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" >方法</label>
+                  <div class="controls">
+                    <input type="text" name="aname" id="aname" placeholder="以get或者post开头的的英文">&nbsp;<span></span>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" style="padding-top:10px">状态</label>&nbsp;
+                  <label class="radio" style="margin-left:35px;line-height:40px"><input type="radio" name="status" checked id="status" style="margin-top:14px" value="0">启用</label>
+                  <label class="radio" style="margin-left:35px;line-height:40px"><input type="radio" name="status" id="status" style="margin-top:14px" value="1">禁用</label>
+                </div>
+                <div class="form-actions">
+                  <input type="submit" value="提交" class="btn btn-success">
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+        </button>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<title>忘记密码</title>
+<link rel="shortcut icon" href="images/favicon.ico" />
+<link type="text/css" href="/static/homes/foget/css/css.css" rel="stylesheet" />
+<script src="/static/admins/js/jquery.min.js"></script>
+</head>
+
+<body style="background:url('/static/homes/images/bg.jpg');">
+
+  <div class="content">
+   <div class="web-width">
+     <div class="for-liucheng">
+      <div class="liulist for-cur"></div>
+      <div class="liulist"></div>
+      <div class="liulist"></div>
+      <div class="liulist"></div>
+      <div class="liutextbox">
+       <div class="liutext for-cur"><em>1</em><br /><strong>填写账户名</strong></div>
+       <div class="liutext"><em>2</em><br /><strong>验证身份</strong></div>
+       <div class="liutext"><em>3</em><br /><strong>设置新密码</strong></div>
+       <div class="liutext"><em>4</em><br /><strong>完成</strong></div>
+      </div>
+     </div><!--for-liucheng/-->
+     <form action="/forget/forget1" method="get" class="forget-pwd">
+       <dl>
+        <dt>账户名：</dt>
+        <dd id="d"><input type="text" name="username" id="name" autocomplete="off"></dd><span style="margin-left:110px;"></span>
+        <div class="clears"></div>
+       </dl>
+       <dl>
+        <dt>验证码：</dt>
+        <dd id="dd">
+         <input type="text" name="code" id="code"/>
+         <div class="yanzma">
+          <!-- <img src="{:captcha_src()}" id="huan" onclick='this.src="{:captcha_src()}?rand="+Math.random()' style="width:90px;height:30px;" /> <a href="javascript:;" onclick='"{:captcha_src()}?rand="+Math.random()'>换一换</a> -->
+          <div>
+            <img id="verify_img" src="{:captcha_src()}" alt="验证码" onclick="refreshVerify()" style="width:100px;">
+            <a href="javascript:refreshVerify()">换一换</a>
+        </div>
+         </div>
+        </dd>
+        <span style="margin-left:110px;"></span>
+        <div class="clears"></div>
+       </dl>
+       <div class="subtijiao"><input type="submit" value="提交" /></div>
+      </form><!--forget-pwd/-->
+   </div><!--web-width/-->
+  </div><!--content/-->
+
+</body>
+<script>
+  //设立标志
+  a=true;
+  b=true;
+
+  //验证码换一换
+  function refreshVerify() {
+        var ts = Date.parse(new Date())/1000;
+        var img = document.getElementById('verify_img');
+        img.src = "/captcha?id="+ts;
+  }
+
+
+  //聚焦事件
+  $("#name").focus(function(){
+    $("#d").next('span').html('请输入您的用户名').css('color','#666');
+  });
+
+  //账号验证
+  $("#name").blur(function(){
+    name=$("#name").val();
+    if(name==''){
+      a=false;
+      $("#d").next('span').html('账号名不能为空!').css('color','red');
+    }else{
+      $.post("/forget/check",{name:name},function(data){
+        if(data==1){
+          a=true;
+          $("#d").next('span').html('账号名正确').css('color','green');
+        }else{
+          a=false;
+          $("#d").next('span').html('账号不存在!').css('color','red');
+        }
+      });
+    }
+  });
+
+  //验证码校验
+  $("#code").blur(function(){
+    code=$("#code").val();
+    if(code==''){
+      b=false;
+      $("#dd").next('span').html('请输入验证码').css('color','red');
+    }else{
+      $.post("/forget/check",{code:code},function(data){
+        if(data){
+          b=true;
+          $("#dd").next('span').html('验证码正确').css('color','green');
+        }else{
+          b=false;
+          $("#dd").next('span').html('验证码有误').css('color','red');
+        }
+      });
+    }
+  });
+
+  //表单绑定提交事件
+  $('form').submit(function(){
+     $("input").trigger('blur');
+    if(a&&b){
+      $("#dd").next('span').css('display','none');
+      return true;
+    }else{
+      return false;
+    }
+  });
+
+</script>
+</script>
+</html>

@@ -1,0 +1,102 @@
+{extend name="AdminPublic:public"/}
+{block name="main"}
+<script type="text/javascript" charset="utf-8" src="/static/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/ueditor/ueditor.all.min.js"> </script>
+<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<script type="text/javascript" charset="utf-8" src="/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+<style>.table td{text-align:center;}.iradio-blue{line-height:50px}</style>
+  <div id="content-header">
+    <div id="breadcrumb">
+     <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+     <a href="/Information/list" class="current">资讯管理</a><a href="/Information/add" class="current">添加资讯</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+    </div>
+   </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+              <h5>添加资讯</h5>
+            </div>
+            <div class="widget-content nopadding">
+              <form class="form-horizontal" action="/information/insert" method="post" name="basic_validate" id="basic_validate" novalidate="novalidate" enctype="multipart/form-data">
+                <div class="control-group">
+                  <label class="control-label">标题</label>
+                  <div class="controls">
+                    <input class="span10" placeholder="输入该条资讯的标题" type="text" name="title" id="title">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">相关电影</label>
+                  <div class="controls">
+                    <input type="text" class="span10" name="movie" id="movie" placeholder="输入电影的中文名称或者英文名称"><br>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">发布时间</label>
+                  <div class="controls">
+                    <input type="text" name="newstime" id="newstime" onClick="WdatePicker({skin:'default',minDate:'%y-%M-%d'})" class="Wdate" autocomplete="off" value="">
+                  </div>
+                </div>
+                <div class="control-group">
+  	              <label class="control-label">图片</label>
+  	              <div class="controls">
+  	                <input type="file" size="19" style="opacity: 1;" id="pic" name="pic">
+  	              </div>
+  	            </div>
+  				      <div class="control-group">
+  	              <label class="control-label">内容</label>
+  	              <div class="controls">
+  	                <script id="editor" type="text/plain" style="width:700px;height:500px;" name="descr"></script>
+  	              </div>
+  	            </div>
+                <div class="form-actions">
+                  <input type="submit" value="提交" class="btn btn-success">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="/static/admins/js/jquery.min.js"></script>
+<script src="/static/admins/js/matrix.form_common.js"></script>
+<script type="text/javascript" src="/static/admins/lib/layer/2.4/layer.js"></script>
+<script>
+   //实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue = UE.getEditor('editor');
+</script>
+<script>
+  $("#movie").blur(function(){
+    m = $(this).val();
+    obj = $(this);
+    $.get("/information/select",{m:m},function(data){
+      if(data){
+        if(data['code']==0){
+          layer.msg(data['msg'],{icon:2,time:3000});
+        }else if(data == "2"){
+          layer.msg("没有相关电影资源,请输入其他名称",{icon:2,time:3000});
+        }else{
+          obj.after("<br><span>请选择以下相关电影</span><br>");
+          for(var i=0;i<data.length;i++){
+            inp = $("<label style='display:inline-block;'><input type='radio' name='mid' value='"+data[i].id+"' style='margin:0;'><span style='margin:0 10px 0 0;'>"+data[i].ch_name+"</span></label>");
+            obj.next("br").next("span").next("br").after(inp);
+          }
+        }
+      }else{
+        layer.msg('请输入电影的中文名称或者英文名称!',{icon: 5,time:3000});
+      }
+    });
+  })
+  //获取焦点 删除之前失去焦点添加的内容
+  $("#movie").focus(function(){
+    $(this).nextAll().remove();
+  });
+</script>
+{/block}
+{block name="title"}资讯添加{/block}
+{block name="style5"}style="display:block"{/block}
+{block name="menu5"}open{/block}

@@ -1,0 +1,233 @@
+{extend name="AdminPublic:public"}
+{block name="main"}
+<style>
+	.thumbnails{margin:0px;}
+	.thumbnails li{margin:0px;}
+	.gradeA td{line-height:40px}
+</style>
+ <div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+   <a href="/movie/list" class="current">影片管理</a><a href="/movie/list" class="current">影片列表</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+<div class="container-fluid">
+  <div class="row-fluid">
+   <div class="span12">
+    <div class="widget-box">
+     <div class="widget-title">
+      <span class="icon"><i class="icon-th"></i></span>
+      <h5>影片列表</h5>
+     </div>
+     <div class="widget-content nopadding">
+      <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
+       <div class="">
+        <div id="DataTables_Table_0_length" class="dataTables_length">
+          <a href="/movie/add" class="btn btn-primary">添加影片</a>
+        </div>
+       </div>
+       <table class="table table-bordered data-table dataTable" id="DataTables_Table_0">
+        <thead>
+         <tr role="row">
+         	<th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 21px;">
+           <div class="DataTables_sort_wrapper">
+			选择
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 21px;">
+           <div class="DataTables_sort_wrapper">
+            ID
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+		<th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 81px;">
+           <div class="DataTables_sort_wrapper">
+            图片
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 118px;">
+
+           <div class="DataTables_sort_wrapper">
+           影片名称
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 106px;">
+           <div class="DataTables_sort_wrapper">
+            影片类型
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 106px;">
+           <div class="DataTables_sort_wrapper">
+            语言版本
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+           <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 106px;">
+           <div class="DataTables_sort_wrapper">
+           上映时间
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+           <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 36px;">
+           <div class="DataTables_sort_wrapper">
+            已售票
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 36px;">
+           <div class="DataTables_sort_wrapper">
+           上下架
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+           <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 36px;">
+           <div class="DataTables_sort_wrapper">
+            预告/上映
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 106px;">
+           <div class="DataTables_sort_wrapper">
+            操作
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+
+         </tr>
+        </thead>
+        <tbody role="alert" aria-live="polite" aria-relevant="all">
+        {foreach name="$data" item="row"}
+         <tr class="gradeA odd text-center" >
+          <td class="  sorting_1">
+          	<input type="checkbox" value="{$row.id}">
+          </td>
+          <td class="">{$row.id}</td>
+          <td ><ul class="thumbnails">
+<li class="span12"> <img src="{$row['picurl']}" width="30" height="30"><div class="actions"><a class="lightbox_trigger" href="{$row['picurl']}"><i class="icon-search"></i></a></div></li>
+</ul></td>
+          <td class=""><a href="/movie/info/id/{$row.id}">{$row.ch_name}</a></td>
+          <td class="">{$row.m_type}</td>
+          <td class="">{$row.laguage}{if condition="$row.m_version==0"}2D{elseif condition="$row.m_version==1"}3D{else}2D/3D{/if}</td>
+          <td class="">{$row.m_addtime}</td>
+          <td class="">{$row.surplus}</td>
+          <td class="td-status">{if condition="$row.display==0"}<span class="btn btn-mini btn-warning">已上架</span>{else}<span class="btn btn-mini btn-inverse">已下架</span>{/if}</td>
+
+		  <td class="td-status">{if condition="$row.status==0"}<span class="btn btn-mini btn-warning">预告</span>{else}<span class="btn btn-mini btn-inverse">已上映</span>{/if}</td>
+
+          <td class="td-manage">
+          	{if condition="$row.display==1"}
+            <a href="/movie/change/id/{$row['id']}/display/0" onClick="return confirm('你确定上架吗？')" class="btn btn-mini btn-warning" title="上架">上架</a>
+            {else}
+            <a href="/movie/change/id/{$row['id']}/display/1" onClick="return confirm('你确定下架吗？')" class="btn btn-mini btn-inverse" title="下架">下架</a>
+            {/if}
+            <a href="/movie/edit/id/{$row.id}" class="btn btn-mini btn-info" title="编辑">编辑</a>
+            <a href="JavaScript:void(0);"  class="btn btn-mini btn-danger" delname="{$row['id']}" onclick="del({$row.id})" title="删除">删除</a>
+          </td>
+         </tr>
+          {/foreach}
+          <tr>
+          	<td colspan="4" style="text-align:left">
+				<a href="javascript:void(0)" class="btn btn-success allchoose">全选</a> <a href="javascript:void(0)" class="btn btn-danger nochoose">全不选</a> <a href="javascript:void(0)" class="btn btn-info fchoose">反选</a>
+				<a href="javascript:void(0)" class="btn btn-success dels">批量删除</a>
+          	</td>
+          	<td colspan="7" style="text-align:right;border-left:0px">
+				        <div id="pages" style="position:absolute;right:10px">
+                  {$data->appends($request)->render()}
+           		  </div>
+          	</td>
+          </tr>
+          <tr>
+       	  </tr>
+        </tbody>
+       </table>
+          <div class="dataTables_filter" id="DataTables_Table_0_filter">
+            <form action="">
+              <label><input type="text" name="keywords" value="{$k}" aria-controls="DataTables_Table_0" placeholder="影片名称关键字"><input type="submit" class="btn btn-info" value="搜索"></label>
+            </form>
+          </div>
+           <div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers" id="DataTables_Table_0_paginate">
+          </div>
+        </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+</div>
+<script src="/static/admins/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admins/lib/layer/2.4/layer.js"></script>
+<script>
+//jq和ajax删除
+function del(id){
+	//找到具体节点对象tr
+	ss=$("a[delname="+id+"]").parents("tr");
+	//layer插件
+	layer.confirm('确认要删除吗？',function(index){
+		//ajax交互数据 传入id
+		$.get("/movie/delete",{id:id},function(data){
+			//判断传回的数据
+			if(data==1){
+				if(data['code']==0){
+		          layer.msg(data['msg'],{icon:2,time:3000});
+		        }else{
+					ss.remove();
+					layer.msg('删除数据成功!',{icon: 1,time:1000});
+				}
+			}
+		});
+	});
+}
+
+//全选
+$(".allchoose").click(function(){
+	$("#DataTables_Table_0").find("tr").each(function(){
+		$(this).find(":checkbox").attr("checked",true);
+
+	});
+
+});
+
+//全不选
+$(".nochoose").click(function(){
+	$("#DataTables_Table_0").find("tr").each(function(){
+		$(this).find(":checkbox").attr("checked",false);
+
+	});
+
+});
+
+//反选
+$(".fchoose").click(function(){
+	$("#DataTables_Table_0").find("tr").each(function(){
+		if($(this).find(":checkbox").attr("checked")){
+			$(this).find(":checkbox").attr("checked",false);
+
+		}else{
+			$(this).find(":checkbox").attr("checked",true);
+		}
+	});
+})
+
+//ajax批量删除
+$(".dels").click(function(){
+	arr=[];
+	$(":checkbox").each(function(){
+		if($(this).attr("checked")){
+			id=$(this).val();
+			arr.push(id);
+		}
+
+	});
+
+	$.get("/movie/dels",{arr:arr},function(data){
+		if(data == 1){
+			alert("数据删除成功");
+			for(var i=0;i<arr.length;i++){
+				$("input[value="+arr[i]+"]").parents("tr").remove();
+			}
+		}else{
+			alert(data);
+		}
+	});
+})
+</script>
+{/block}
+{block name="title"}影片列表{/block}
+{block name="style3"}style="display:block"{/block}
+{block name="menu3"}open{/block}

@@ -1,0 +1,246 @@
+{extend name="AdminPublic:public"}
+{block name="main"}
+ <div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+   <a href="/role/index" class="current">角色管理</a><a href="/role/index" class="current">角色列表</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+<div class="container-fluid">
+  <div class="row-fluid">
+   <div class="span12">
+    <div class="widget-box">
+     <div class="widget-title">
+      <span class="icon"><i class="icon-th"></i></span>
+      <h5>角色列表</h5>
+     </div>
+     <div class="widget-content nopadding">
+      <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
+       <div class="">
+        <div id="DataTables_Table_0_length" class="dataTables_length">
+          <a href="JavaScript:;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">添加角色</a>
+        </div>
+        <!-- 加载添加页面模态框 -->
+        {include file="Role:add" /}
+        <!-- 加载添加页面模态框 -->
+        </div>
+       </div>
+       <table class="table table-bordered data-table dataTable" id="DataTables_Table_0">
+        <thead>
+         <tr role="row">
+         <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 21px;">
+           <div class="DataTables_sort_wrapper">
+            选择
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 81px;">
+           <div class="DataTables_sort_wrapper">
+            ID
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 118px;">
+           <div class="DataTables_sort_wrapper">
+            角色名称
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+           <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 118px;">
+           <div class="DataTables_sort_wrapper">
+            状态
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+           <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 118px;">
+           <div class="DataTables_sort_wrapper">
+            操作
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+         </tr>
+        </thead>
+        <tbody role="alert" aria-live="polite" aria-relevant="all">
+        {foreach name="role" item="row"}
+         <tr class="gradeA odd text-center">
+          <td class=""><input type="checkbox" value="{$row.id}"></input></td>
+          <td class="">{$row.id}</td>
+          <td class="">{$row.name}</td>
+          <td class="td-status">{if condition="$row.status==1"}<span class="btn btn-mini btn-inverse">已禁用</span>{else}<span class="btn btn-mini btn-warning">已启用</span>{/if}</td>
+          <td class="td-manage">
+
+            {if condition='$row.status==1'}
+            <a href="JavaScript:;" onclick="start('{$row.id}')" idname="{$row.id}" class="btn btn-mini btn-warning"  title="启用"><i class="icon  icon-ok-sign"></i></a>
+            {else}
+            <a href="JavaScript:;" onclick="stop('{$row.id}')" idname="{$row.id}" class="btn btn-mini btn-inverse"  title="禁用"><i class="icon icon-minus-sign"></i></a>
+            {/if}
+            <a href="/role/edit/id/{$row.id}" class="btn btn-mini btn-info" title="修改角色"><i class="icon icon-pencil"></i></a>
+            <a href="JavaScript:;" onclick="del({$row.id})" delname="{$row.id}" class="btn btn-mini btn-danger" title="删除"><i class="icon icon-remove"></i></a>
+            <a href="/adminlists/auth/id/{$row.id}" class="btn btn-mini btn-primary" title="分配权限">分配权限</a>
+          </td>
+         </tr>
+         {/foreach}
+          <tr>
+            <td colspan="3" style="text-align:left;"><div class="">
+            <div id="DataTables_Table_0_length" class="dataTables_length" style="width:100px;float:left;margin-left:0;">
+              <a href="JavaScript:;" class="btn btn-danger mdel" >批量删除</a>
+            </div>
+            <div id="DataTables_Table_0_length" class="dataTables_length" style="width:60px;float:left;position:relative;left:-20px;">
+              <a href="JavaScript:;" class="btn btn-success allchoose">全选</a>
+            </div>
+            <div id="DataTables_Table_0_length" class="dataTables_length" style="float:left;width:60px;position:relative;left:-33px;">
+              <a href="JavaScript:;" class="btn btn-warning fchoose">反选</a>
+            </div>
+            <div id="DataTables_Table_0_length" class="dataTables_length" style="float:left;width:80px;position:relative;left:-46px;">
+              <a href="JavaScript:;" class="btn btn-info nochoose">全不选</a>
+            </div>
+      </div></td>
+          <td colspan="4" style="text-align:right;border-left:0;">
+              <div id="pages" style="position:absolute;right:10px;">
+                  {$role->appends($request)->render()}
+              </div>
+          </td>
+         </tr>
+        </tbody>
+       </table>
+       <div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
+
+          <div class="dataTables_filter" id="DataTables_Table_0_filter">
+            <form action="">
+              <label><input type="text" name="keywords" value="{$keywords}" placeholder="角色名称" style="width:200px !important"><input type="submit" class="btn btn-info" value="搜索"></label>
+            </form>
+          </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+</div>
+<script src="/static/admins/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admins/lib/layer/2.4/layer.js"></script>
+<script>
+// 启用
+function start(id){
+  flag=false;
+  obj = $("a[idname="+id+"]");
+  layer.confirm('确认要启用吗？',function(index){
+    $.get("/role/change",{id:id,status:0},function(data){
+      console.log(data);
+      if(data){
+        if(data['code']==0){
+          layer.msg(data['msg'],{icon: 2,time:5000});
+        }else{
+          obj.parents("tr").find(".td-manage").prepend('<a href="JavaScript:;" onclick="stop('+id+')" idname="'+id+'" class="btn btn-mini btn-inverse"  title="禁用"><i class="icon icon-minus-sign"></i></a>');
+          obj.parents("tr").find(".td-status").html('<span class="btn btn-mini btn-warning">已启用</span>');
+          obj.remove();
+          layer.msg('已启用!',{icon: 6,time:1000});
+        }
+      }
+    });
+  });
+}
+
+//禁用
+function stop(id){
+  obj = $("a[idname="+id+"]");
+  layer.confirm('确认要禁用吗？',function(index){
+    $.get("/role/change",{id:id,status:1},function(data){
+      console.log(data);
+      if(data){
+        if(data['code']==0){
+          layer.msg(data['msg'],{icon: 2,time:5000});
+        } else {
+          obj.parents("tr").find(".td-manage").prepend('<a href="JavaScript:;" onclick="start('+id+')" idname="'+id+'" class="btn btn-mini btn-warning"  title="启用"><i class="icon  icon-ok-sign"></i></a>');
+          obj.parents("tr").find(".td-status").html('<span class="btn btn-mini btn-inverse">已禁用</span>');
+          obj.remove();
+          layer.msg('已禁用!',{icon: 5,time:1000});
+        }
+      }
+    });
+  });
+}
+
+//删除角色
+function del(id){
+  obj = $("a[delname="+id+"]");
+  layer.confirm('确认要删除吗',function(index){
+    $.get("/role/delete",{id:id},function(data){
+      if(data){
+        if(data['code']==0){
+          layer.msg(data['msg'],{icon: 2,time:5000});
+        } else {
+          $(obj).parents("tr").remove();
+          layer.msg('删除数据成功!',{icon: 1,time:1000});
+        }
+      }
+    });
+  });
+}
+
+//全选
+$('.allchoose').click(function(){
+    //遍历所有table里面的tr
+    $('#DataTables_Table_0').find("tr").each(function(){
+       //获取所有的复选框 选中
+       $(this).find(':checkbox').attr('checked',true);
+    });
+});
+
+//全不选
+$('.nochoose').click(function(){
+    //遍历所有table里面的tr
+    $('#DataTables_Table_0').find("tr").each(function(){
+       //获取所有的复选框 选中
+       $(this).find(':checkbox').attr('checked',false);
+    });
+});
+
+//反选
+$('.fchoose').click(function(){
+    //遍历tr
+    $('#DataTables_Table_0').find("tr").each(function(){
+        //判断
+       if($(this).find(':checkbox').attr('checked')){
+            $(this).find(':checkbox').attr('checked',false);
+       }else{
+            $(this).find(':checkbox').attr('checked',true);
+       }
+    });
+});
+
+//批量删除
+$('.mdel').click(function(){
+    arr=[];
+    //获取选中数据的id
+    $(":checkbox").each(function(){
+        //判断
+        if($(this).attr("checked")){
+            //获取选中复选 id
+            id=$(this).val();
+            //添加元素到数组
+            arr.push(id);
+        }
+    });
+    //Ajax还原
+     layer.confirm('确定要彻底删除吗？',function(index){
+        $.get("/role/mdel",{arr:arr},function(data){
+        if(data){
+            if(data['code']==0){
+                layer.msg(data['msg'],{icon: 2,time:1000});
+            }else{
+                 //遍历
+                 for(var i=0;i<arr.length;i++){
+                    //把删除数据的tr从dom移除
+                    $("input[value="+arr[i]+"]").parents("tr").remove();
+                }
+                layer.msg('删除成功!',{icon: 1,time:1000});
+            }
+        }else{
+            layer.msg('至少选中一个!',{icon: 5,time:1000});
+        }
+        });
+   });
+
+});
+</script>
+{/block}
+{block name="title"}角色列表{/block}
+{block name="style"}style="display:block"{/block}
+{block name="menu"}open{/block}

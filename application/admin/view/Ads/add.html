@@ -1,0 +1,58 @@
+<!-- 模态框（Modal） -->
+<div class="modal fade " style="width:800px;display:none !important" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog " >
+		<div class="modal-content " >
+			<div class="modal-header ">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					广告管理
+				</h4>
+			</div>
+			<div class="modal-body">
+					<div class="widget-box">
+						<div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+							<h5>添加广告</h5>
+						</div>
+						<div class="widget-content nopadding">
+							<form class="form-horizontal" action="/ads/insert" method="post"  name="basic_validate" id="basic_validate" novalidate="novalidate" enctype="multipart/form-data">
+								<div class="control-group">
+									<label class="control-label">广告名称</label>
+									<div class="controls">
+										<input type="text" name="name">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">网址</label>
+									<div class="controls">
+										<input type="text" name="url">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">图片</label>
+									<div class="controls">
+     									<input type="file" name="file"/>
+	            					</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">描述</label>
+									<div class="controls">
+										<textarea name="desc"></textarea>
+									</div>
+								</div>
+								<div class="form-actions">
+									<input type="submit" value="提交" class="btn btn-success" id="btn">
+								</div>
+							</form>
+						</div>
+					</div>
+			</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

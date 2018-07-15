@@ -1,0 +1,78 @@
+{extend name="AdminPublic:public"/}
+{block name="main"}
+<style>.table td{text-align:center;}.iradio-blue{line-height:50px}</style>
+  <div id="content-header">
+    <div id="breadcrumb">
+     <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+     <a href="/carousel/list" class="current">轮播图管理</a><a href="javascript:;" class="current">修改轮播图</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+    </div>
+   </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+              <h5>修改轮播图</h5>
+            </div>
+            <div class="widget-content nopadding">
+              <form class="form-horizontal" action="/carousel/update" method="post" name="basic_validate" id="basic_validate" novalidate="novalidate" enctype="multipart/form-data">
+              	<div class="control-group">
+                  <label class="control-label">顺序</label>
+                  <div class="controls">
+                    <input class="span10"  type="text" name="sort" id="sort" value="{$info.sort}">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">标题</label>
+                  <div class="controls">
+                    <input class="span10"  type="text" name="title" id="title" value="{$info.title}">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">链接地址</label>
+                  <div class="controls">
+                    <input class="span10" placeholder="输入该条轮播图的链接地址" type="text" name="img_link" id="img_link" value="{$info.img_link}">
+                  </div>
+                </div>
+                <div class="control-group">
+  	              <label class="control-label">轮播图片</label>
+  	              <div class="controls">
+  	                <img src="{$info.img_url}" width="800px" alt="">
+  	              </div>
+  	            </div>
+                <div class="control-group">
+                  <label class="control-label">上传图片</label>
+                  <div class="controls">
+                    <input type="file" size="19" style="opacity:1;" id="img_url" name="img_url" >
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">前台显示</label>
+                  <div class="controls">
+                    <label class="radio" style="margin-left:35px;line-height:40px"><input type="radio" name="status" id="status" style="margin-top:14px" value="0" {if condition="$info.status==0"}checked{/if}>是</label>
+                    <label class="radio" style="margin-left:35px;line-height:40px"><input type="radio" name="status" id="status" style="margin-top:14px" value="1" {if condition="$info.status==1"}checked{/if}>否</label>
+                  </div>
+               </div>
+                <div class="form-actions">
+                  <input type="hidden" name="id" value="{$info.id}" >
+                  <input type="submit" value="提交" class="btn btn-success">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="/static/admins/js/jquery.min.js"></script>
+<script src="/static/admins/js/matrix.form_common.js"></script>
+<script type="text/javascript" src="/static/admins/lib/layer/2.4/layer.js"></script>
+<script>
+   //实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue = UE.getEditor('editor');
+</script>
+{/block}
+{block name="title"}轮播图修改{/block}
+{block name="style8"}style="display:block"{/block}
+{block name="menu8"}open{/block}

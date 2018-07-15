@@ -1,0 +1,187 @@
+{extend name="AdminPublic:public"}
+{block name="main"}
+<script src="/static/admins/js/jquery.min.js"></script>
+<style>
+  .ul{margin-left:5px}
+  li{list-style-type:none;}
+  .ull li{display:none}
+</style>
+<script type="text/javascript">
+$(function(){
+    $('.tree li:has(ul)').addClass('parent_li');
+    $('.tree li.parent_li > span').on('click',function (e) {
+        var children = $(this).parent('li.parent_li').find(' > ul > li');
+        if (children.is(":visible")) {
+            children.hide('fast');
+            $(this).find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+        } else {
+            children.show('fast');
+            $(this).find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+        }
+        e.stopPropagation();
+    });
+});
+</script>
+ <div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+   <a href="/movieimage/list" class="current">图片管理</a><a href="/movieimage/list" class="current">图片列表</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+<div class="container-fluid">
+  <div class="row-fluid">
+   <div class="span12">
+    <div class="widget-box">
+     <div class="widget-title">
+      <span class="icon"><i class="icon-th"></i></span>
+      <h5>图片列表</h5>
+     </div>
+     <div class="widget-content nopadding">
+     <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
+       <div class="">
+        <div id="DataTables_Table_0_length" class="dataTables_length" >
+          <a href="/movieimage/add" class="btn btn-primary">添加图片</a>
+        </div>
+        </div>
+       </div>
+      <div id="uid" style="border-top:1px solid #ccc">
+      <table class="table table-bordered data-table dataTable" >
+      <tr class="gradeA odd text-center">
+        <td width="200" class="va-t" style="text-align:left">
+          <div class="tree" style="margin-top:10px">
+          {foreach name="$data" item="row"}
+            <ul class="ul">
+              <li>
+                <span class="btn btn-lg btn-success" title="{$row.en_name}"><i class="glyphicon icon-plus-sign glyphicon-cog"></i>{$row.ch_name}</span>
+                  <ul class="ull">
+                    <li>
+                     <span director="{$row.id}" name="director"  class="btn btn-sm btn-warning"><i class="icon-time"></i><a href="javascript:;" style="text-decoration: none;">导演</a></span>
+                    </li>
+                    <li>
+                     <span actor="{$row.id}" name="actor" class="btn btn-sm btn-warning"><i class="icon-time"></i><a href="#" style="text-decoration: none;">演员</a></span>
+                    </li>
+                 </ul>
+              </li>
+            </ul>
+          {/foreach}
+        </div>
+      </td>
+      <!-- 导演图片添加 -->
+      <td class="director" style="display:none">
+
+      </td>
+      <td class="actor" style="display:none;">
+
+      </td>
+      </tr>
+      <tr><td colspan="4"><div id="pages" >{$data->appends($request)->render()}</div></td></tr>
+      </table>
+      </div>
+     <div class="dataTables_filter" id="DataTables_Table_0_filter">
+      <form action="/movieimage/list" method="get">
+        <label><input type="text" name="keywords" placeholder="电影中文名" value="{$k}"><input type="submit" class="btn btn-info" value="搜索"></label>
+      </form>
+    </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<script type="text/javascript" src="/static/admins/lib/layer/2.4/layer.js"></script>
+<script>
+//展示导演
+  arr = [];
+  $("span[name='director']").each(function(e){
+    if($(this).attr('director')!=undefined){
+      mid=$(this).attr('director');
+      arr.push(mid);
+      $(this).click(function(){
+        $(".director").css("display","block");
+        $(".actor").css("display","none");
+        $.get("/movieimage/director",{arr:arr,e:e},function(data){
+          if(data){
+            if(data['code']==0){
+              layer.msg(data['msg'],{icon:2,time:3000});
+            }else{
+              $('.director').html(data);
+            }
+          }else{
+            $('.director').html('<h1>暂无数据</h1>');
+          }
+        });
+      });
+    }
+   });
+
+//展示演员
+  array = [];
+  $("span[name='actor']").each(function(e){
+    if($(this).attr('actor')!=undefined){
+      mid=$(this).attr('actor');
+      array.push(mid);
+      $(this).click(function(){
+        $(".director").css("display","none");
+        $(".actor").css("display","block");
+        $.get("/movieimage/actor",{array:array,e:e},function(data){
+          if(data){
+              if(data['code']==0){
+                layer.msg(data['msg'],{icon:2,time:3000});
+              }else{
+                $('.actor').html(data);
+              }
+          }else{
+            $('.actor').html('<h1>暂无数据</h1>');
+          }
+        });
+      });
+    }
+   });
+
+  //删除演员图片
+  function del(id){
+    o = $('div[name="div'+id+'"]');
+    console.log(o);
+    layer.confirm('确认要删除吗',function(index){
+      $.get("/movieimage/adelete",{id:id},function(data){
+        if(data){
+          if(data['code']==0){
+            layer.msg(data['msg'],{icon:2,time:3000});
+          }else{
+            o.remove();
+            $('.icon-remove').css('display','none');
+            layer.msg('删除成功',{icon:1,time:3000});
+          }
+        }else{
+            layer.msg('删除失败',{icon:2,time:3000});
+        }
+
+      });
+    });
+  }
+
+  //删除导演图片
+  function ddelete(id){
+    o = $('div[name="div'+id+'"]');
+    console.log(o);
+    layer.confirm('确认要删除吗',function(index){
+      $.get("/movieimage/ddelete",{id:id},function(data){
+        if(data){
+          if(data['code']==0){
+            layer.msg(data['msg'],{icon:2,time:3000});
+          }else{
+            o.remove();
+            $('.icon-remove').remove();
+            layer.msg('删除成功',{icon:1,time:3000});
+          }
+        }else{
+            layer.msg('删除失败',{icon:2,time:3000});
+        }
+
+      });
+    });
+  }
+</script>
+{/block}
+{block name="title"}图片列表{/block}
+{block name="style7"}style="display:block"{/block}
+{block name="menu7"}open{/block}

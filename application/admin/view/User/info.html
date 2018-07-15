@@ -1,0 +1,97 @@
+{extend name="AdminPublic:public"}
+{block name="main"}
+<div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+   <a href="javascript:;" class="current">用户详情展示</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+<div class="container-fluid">
+  <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box" style="opacity:1;position:fixed;box-shadow: darkgrey 10px 10px 20px 5px;">
+          <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+            <h5>用户详情</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <form class="form-horizontal" method="post" name="basic_validate" id="basic_validate" novalidate="novalidate">
+            <div class="control-group span12">
+            	<div class="span4">
+	                <label class="control-label" style="cursor:default;"><i class="icon-user" style="margin-right:10px;"></i>名 字 :</label>
+	                <div class="controls">
+	                  <label style="line-height:30px;cursor:default;"><span>{$data.name}</span></label>
+	                </div>
+	            </div>
+	            <div class="span4">
+	                <label class="control-label" style="cursor:default;"><i class="icon-group" style="margin-right:10px;"></i>性 别 :</label>
+	                <div class="controls" style="line-height:30px;">
+	                  <input type="radio" name="sex" value="1" {if condition="$data.sex==1"}checked{/if}>男
+	                  <input type="radio" name="sex" value="0" style="margin-left:15px;" {if condition="$data.sex==0"}checked{/if}>女
+	                </div>
+	             </div>
+	        </div>
+	        <div class="control-group span12" style="margin:0;" >
+            	<div class="span4">
+	                <label class="control-label" style="cursor:default;"><i class="icon-gift" style="margin-right:9px;"></i>生 日 :</label>
+	                <div class="controls">
+	                   <label style="line-height:30px;cursor:default;"><span>{$data.birthday}</span></label>
+	                </div>
+	            </div>
+	            <div class="span4">
+	                <label class="control-label" style="cursor:default;"><i class="icon-heart" style="margin-right:10px;"></i>爱 好 :</label>
+	                <div class="controls " class="span3">
+	                   <label style="line-height:30px;cursor:default;"><span>{$data.hobby}</span></label>
+	                </div>
+	             </div>
+	        </div>
+	        <div class="control-group span12" style="margin:0;" >
+            	<div class="span4">
+	                <label class="control-label" style="cursor:default;"><i class="icon-tags" style="margin-right:7px;"></i>职 业 :</label>
+	                <div class="controls">
+	                   <label style="line-height:30px;cursor:default;"><span>{$data.job}</span></label>
+	                </div>
+	            </div>
+	            <div class="span4">
+	                <label class="control-label" style="cursor:default;"><i class="icon-phone" style="margin-right:10px;"></i>电 话 :</label>
+	                <div class="controls " class="span3">
+	                   <label style="line-height:30px;cursor:default;"><span>{$data.phone}</span></label>
+	                </div>
+	             </div>
+	        </div>
+	        <div class="control-group span12" style="margin:0;" >
+            	<div class="span4">
+	                <label class="control-label" style="cursor:default;"><i class="icon-picture" style="margin-right:7px;"></i>头 像 :</label>
+	                <div class="controls">
+	                   <label style="line-height:30px;cursor:default;"><span><img src="{$data.picurl}" width="70px;"></span></label>
+	                </div>
+	            </div>
+	            <div class="span4">
+	                <label class="control-label" style="cursor:default;"><i class="icon-bullhorn" style="margin-right:8px;"></i>描 述 :</label>
+	                <div class="controls " class="span3">
+	                   <label style="line-height:30px;cursor:default;"><span>{$data.desc}</span></label>
+	                </div>
+	             </div>
+	        </div>
+	        <div class="control-group span12" style="margin:0;" >
+            	<div class="span4">
+	                <label class="control-label" style="cursor:default;"><i class="icon-picture" style="margin-right:7px;"></i>邮 箱 :</label>
+	                <div class="controls">
+	                   <label style="line-height:30px;cursor:default;"><span>{$data.email}</span></label>
+	                </div>
+	            </div>
+	        </div>
+
+            <div class="form-actions">
+                <a href="/user/editinfo/id/{$data.id}" class="btn btn-success" style="margin-top:15px;">修改</a>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block}
+{block name="title"}添加详情{/block}
+{block name="style1"}style="display:block"{/block}
+{block name="menu1"}open{/block}

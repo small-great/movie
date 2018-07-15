@@ -1,0 +1,295 @@
+{extend name="AdminPublic:public"/}
+{block name="main"}
+<script src="/static/admins/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admins/lib/layer/2.4/layer.js"></script>
+<style>.table td{text-align:center;}.iradio-blue{line-height:50px} #box{display: none;margin-left: 45px}</style>
+  <div id="content-header">
+    <div id="breadcrumb">
+     <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+     <a href="/cinema/index" class="current">影院管理</a><a href="/cinema/area" class="current">影院区域分布管理</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+    </div>
+   </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+              <h5>影院区域分布管理</h5>
+            </div>
+            <div class="widget-content nopadding">
+
+              <!-- <form class="form-horizontal" action="area_details" method="post" > -->
+              <div class="form-horizontal">
+                  <div class="control-group">
+                      <label class="control-label">品牌/影店</label>
+                      <div class="controls">
+
+                          <select name="pid"  id="opbrand">
+                              <option value="-1" id="please">---请选择---</option>
+                             <!--  <option value="1">全部</option> -->
+                            {foreach name="brand" item="row"}
+                              <option value="{$row['id']}">{$row['brand']}</option>
+                            {/foreach}
+                            <input type="hidden" name='name' value="" id="hid">
+                          </select>
+                      </div>
+                  </div>
+
+                  <div class="control-group ">
+                      <label class="control-label">区域选择</label>
+                      <div class="controls area">
+                        <select name="pid" id="sid">
+                          <option value="-1" class="ss">--请选择--</option>
+                        </select>
+                      </div>
+                  </div>
+
+                  <div class="form-actions">
+                    <input type="button" value="提交" class="btn btn-success" id="submit">
+                    <input type="button" value="刷新区域选择" class="btn btn-info" id="again">
+                  </div>
+
+                  <div id="box" style="inline-block"><span>你选中的区域是:</span><span id="strbox"></span></div>
+
+                  <div class="widget-box" id="cmv" style="display:none">
+                    <div class="widget-title"> <span class="icon">
+                      <div id="uniform-title-checkbox"><span>选择(用于修改所属区域)</div>
+                      </span>
+
+                    </div>
+
+                    <div class="widget-content nopadding">
+                      <table class="table table-bordered table-striped with-check">
+                        <thead>
+                          <tr>
+                            <th><i class="icon-resize-vertical"></i></th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Area</th>
+                            <th>Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tbody">
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+
+              <!-- </form> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<script>
+
+      //禁止请选择选中
+     $('#please').attr('disabled',true);
+     $('#opbrand').live('change',function(){
+
+          obj = $(this);
+          id = obj.val();
+          $("#cmv").css("display","block");
+          $.get('/cinema/brandsea',{pid:id},function(data){
+            if(data){
+              var op = '';
+                for(var i=0;i<data.length;i++){
+                      op += '<tr><td><input type="checkbox" value="'+data[i].id+'"></td><td>'+data[i].id+'</td><td>'+data[i].name+'</td><td>'+data[i].address+'</td><td class="center">'+data[i].area+'</td><td><a href="/cinema/details/id/'+data[i].id+'" class="btn btn-mini btn-info"title="修改"><i class="icon icon-pencil"></i></a>&nbsp;&nbsp;<a href="JavaScript:void(0);"class="btn btn-mini btn-danger"delname="'+data[i].id+'" onclick="del('+data[i].id+')" title="删除"><i class="icon icon-remove"></i></a></td></tr>';
+                }
+                //console.log(op);
+                $("#tbody").html(op);
+
+            }
+
+      },'json');
+     });
+
+</script>
+<script>
+
+//jq和ajax删除
+function del(id){
+
+  //找到具体节点对象tr
+  ss=$("a[delname="+id+"]").parents("tr");
+
+  //layer插件
+  layer.confirm('确认要删除吗？',function(index){
+    //ajax交互数据 传入id
+    $.get("/cinema/areadel",{id:id},function(data){
+      //判断传回的数据
+      if(data){
+          ss.remove();
+          layer.msg('删除数据成功!',{icon: 1,time:2000});
+      } else {
+           layer.msg('删除数据失败!',{icon:2,time:2000});
+      }
+      console.log(data);
+    });
+  });
+}
+
+// $("a[name='mm']").each(function(e){
+//   console.log(e);
+//   console.log($(this));
+// });
+
+</script>
+
+<script>
+  // 拼接城市区域被选中的文本值,用于插入 details 表中
+  var str = '';
+  // 拼接 path
+  var arr = new Array();
+  //第一级别获取
+  $.get('/cinema/areasea',{upid:0},function(result){
+    if(result['code']==0){
+       layer.msg(result['msg'],{icon:2,time:3000});
+    }else{
+      //禁止请选择选中
+      $('.ss').attr('disabled',true);
+      //  console.log(result);
+      //得到数据数组内容 我们需要遍历得到里面的内容
+      for(var i=0;i<result.length;i++){
+        //console.log(result[i].name);
+        //遍历到option标签中
+        var info =$('<option value="'+result[i].id+'">'+result[i].name+'</option>');
+
+        //将得到的option对象添加到select对象中
+        $('#sid').append(info);
+      }
+      str += $(this).find("option:selected").text();
+    }
+  },'json');
+
+  //其他级别
+  $('.area select').live('change',function(){
+    $(this).attr('disabled',true);
+     // 拼接城市区域被选中的文本值,用于插入 details 表中
+    str += $(this).find("option:selected").text();
+    //alert(str);
+     $('#box').css('display','block');
+     $('#strbox').empty();
+     $('#strbox').html(str);
+    obj = $(this);
+    // 拼接 path
+    //通过id来查找下一个级别
+    id = obj.val();
+    arr.push(id);
+   // console.log(arr);
+    //清除所有其他select
+    //alert($(this).val());
+
+
+    //清除所有其他select
+    //obj.nextAll('select').remove();
+    $.getJSON('/cinema/areasea',{upid:id},function(result){
+      //console.log(result);
+      //创建一个select标签对象
+    //console.log(result);
+      if (result.length != 0) {
+        var  select = $('<select class="appendsec"></select>');
+        //防止当前城市没有办法选择所以添加请选择option标签
+        var op = $('<option class="mm">--请选择--</option>');
+        select.append(op);
+        //循环将得到的数组表里到option标签中添加到select标签中
+        for(var i = 0;i<result.length;i++){
+          var  info = $('<option value="'+result[i].id+'">'+result[i].name+'</option>');
+          //将option标签添加到select对象中
+          select.append(info);
+        }
+        //将select对象添加到当前标签后面
+        obj.after(select);
+        //把其他级别的请选择禁用
+        $('.mm').attr('disabled',true);
+      }
+    })
+  })
+
+  //获取选中的数据提交到操作页面
+  $('button').click(function(){
+    arr=[];
+    console.log($('select'));
+    //遍历select
+    $('select').each(function(){
+      //获取当前select选中的option标签的文本值
+      sedata=$(this).find('option:selected').html();
+      //获取到文本值添加到对应的数组中
+      arr.push(sedata);
+    })
+    //删除最后一个数组请选择
+    arr.pop();
+    console.log(arr);
+    //return false;
+
+  })
+
+
+</script>
+
+<script>
+//  重置
+  $('#again').click(function(){
+   // alert(1);
+    //window.location.reload();
+    $('#sid').attr('disabled',false);
+    $("#sid option[value='"+'-1'+"']").attr("selected", "selected");
+    $('.appendsec').remove();
+    $('#strbox').html('');
+
+  });
+</script>
+
+<script>
+
+
+
+       $('#submit').click(function(){
+           var len = arr.length;
+           arr.splice(len-1,1);
+            path = '0,' + arr.join(',');
+            area = str;
+            str = '';
+           // 重置
+           $('#sid').attr('disabled',false);
+           $('.appendsec').remove();
+           $("#sid option[value='"+'-1'+"']").attr("selected", "selected");
+           arr.length = 0;
+           console.log(arr);
+
+           checkarr = [];
+           $(':checkbox').each(function(){
+              if ($(this).attr("checked")) {
+                id=$(this).val();
+                checkarr.push(id);
+                console.log($(this).parents("tr").find("td:eq(4)").html(area));
+                $(this).attr("checked",false);
+              }
+           });
+
+           $.get("/cinema/area_details",{checkarr:checkarr,path:path,str:area},function(data){
+                   if (data != '' || data != null) {
+                    alert('修改成功');
+                   } else {
+                    alert('修改失败');
+                   }
+               });
+       });
+
+
+
+
+</script>
+
+{block name="title"}影院区域分布管理{/block}
+{/block}
+{block name="style2"}style="display:block"{/block}
+{block name="menu2"}open{/block}

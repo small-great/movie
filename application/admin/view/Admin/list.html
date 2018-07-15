@@ -1,0 +1,224 @@
+{extend name="AdminPublic:public"}
+{block name="main"}
+ <div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+   <a href="/admin/list" class="current">管理员管理</a><a href="/admin/list" class="current">管理员列表</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+<div class="container-fluid">
+  <div class="row-fluid">
+   <div class="span12">
+    <div class="widget-box">
+     <div class="widget-title">
+      <span class="icon"><i class="icon-th"></i></span>
+      <h5>管理员列表</h5>
+     </div>
+     <div class="widget-content nopadding">
+      <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
+       <div class="">
+        <div id="DataTables_Table_0_length" class="dataTables_length">
+          <a href="JavaScript:;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">添加管理员</a>
+        </div>
+        <!-- 加载添加页面模态框 -->
+        {include file="Admin:add" /}
+        <!-- 加载添加页面模态框 -->
+        </div>
+       </div>
+       <div id="uid">
+       <table class="table table-bordered data-table dataTable" id="DataTables_Table_0">
+        <thead>
+         <tr role="row">
+          <th style="width: 10px;">选择</th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 21px;">
+           <div class="DataTables_sort_wrapper">
+            ID
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 118px;">
+           <div class="DataTables_sort_wrapper">
+            管理员名称
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 86px;">
+           <div class="DataTables_sort_wrapper">
+            加入时间
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 66px;">
+           <div class="DataTables_sort_wrapper">
+            状态
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 66px;">
+           <div class="DataTables_sort_wrapper">
+            操作
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+         </tr>
+        </thead>
+        <tbody role="alert" aria-live="polite" aria-relevant="all" id="dels">
+        {foreach name="data" item="row"}
+         <tr class="gradeA odd text-center">
+          <td><input type="checkbox" value="{$row.id}"></td>
+          <td class="">{$row.id}</td>
+          <td class="">{$row.name}</td>
+          <td class="">{$row.createtime|date="Y-m-d H:i:s",###}</td>
+          <td class="td-status">{if condition="$row.status==1"}<span class="btn btn-mini btn-inverse">已禁用</span>{else}<span class="btn btn-mini btn-warning">已启用</span>{/if}</td>
+          <td class="td-manage">
+            {if condition='$row.status==1'}
+            <a href="JavaScript:;" onclick="start('{$row.id}')" idname="{$row.id}" class="btn btn-mini btn-warning"  title="启用"><i class="icon  icon-ok-sign"></i></a>
+            {else}
+            <a href="JavaScript:;" onclick="stop('{$row.id}')" idname="{$row.id}" class="btn btn-mini btn-inverse"  title="禁用"><i class="icon icon-minus-sign"></i></a>
+            {/if}
+            <a href="/admin/info/id/{$row.id}/name/{$row.name}" class="btn btn-mini btn-info" title="查看详情"><i class="icon icon-zoom-in"></i></a>
+            <a href="/admin/password/id/{$row.id}/name/{$row.name}" class="btn btn-mini btn-info" title="修改用户和密码"><i class="icon icon-key"></i></a>
+            <a href="JavaScript:;" onclick="del({$row.id})" delname="{$row.id}" class="btn btn-mini btn-danger" title="删除"><i class="icon icon-remove"></i></a>
+            <a href="/admin/rolelist/id/{$row.id}" class="btn btn-mini btn-primary">分配角色</a>
+          </td>
+
+         </tr>
+         {/foreach}
+         <tr style="height:50px;">
+           <td colspan="3" style="text-align:left">
+            <button id="btn1" class="btn btn-info">全选</button>
+            <button id="btn2" class="btn btn-danger">全不选</button>
+            <button id="btn3" class="btn btn-primary">反选</button>
+            <button class="btn btn-warning" id="moredel">批量删除</button>
+          </td>
+          <td colspan="3" style="text-align:rigt;border-left:0;">
+             <div id="pages" style="position:absolute;right:10px;">
+                  {$data->appends($request)->render()}
+              </div>
+          </td>
+         </tr>
+        </tbody>
+       </table>
+       </div>
+       <div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
+          <div class="dataTables_filter" id="DataTables_Table_0_filter">
+            <form action="">
+              <label><input type="text" name="keywords" value="{$keywords}" placeholder="管理员名称" style="width:200px !important"><input type="submit" class="btn btn-info" value="搜索"></label>
+            </form>
+          </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+</div>
+<script src="/static/admins/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admins/lib/layer/2.4/layer.js"></script>
+<script>
+// 启用
+function start(id){
+  obj = $("a[idname="+id+"]");
+  layer.confirm('确认要启用吗？',function(index){
+    $.get("/admin/change",{id:id,status:0},function(data){
+      if(data){
+        if(data['code']==0){
+          layer.msg(data['msg'],{icon:2,time:3000});
+        }else{
+          obj.parents("tr").find(".td-manage").prepend('<a href="JavaScript:;" onclick="stop('+id+')" idname="'+id+'" class="btn btn-mini btn-inverse"  title="禁用"><i class="icon icon-minus-sign"></i></a>');
+          obj.parents("tr").find(".td-status").html('<span class="btn btn-mini btn-warning">已启用</span>');
+          obj.remove();
+          layer.msg('已启用!',{icon: 6,time:1000});
+        }
+      }
+    });
+  });
+}
+//禁用
+function stop(id){
+   obj = $("a[idname="+id+"]");
+  layer.confirm('确认要禁用吗？',function(index){
+    $.get("/admin/change",{id:id,status:1},function(data){
+      if(data){
+        if(data['code']==0){
+          layer.msg(data['msg'],{icon:2,time:3000});
+        }else{
+          obj.parents("tr").find(".td-manage").prepend('<a href="JavaScript:;" onclick="start('+id+')" idname="'+id+'" class="btn btn-mini btn-warning"  title="启用"><i class="icon  icon-ok-sign"></i></a>');
+          obj.parents("tr").find(".td-status").html('<span class="btn btn-mini btn-inverse">已禁用</span>');
+          obj.remove();
+          layer.msg('已禁用!',{icon: 5,time:1000});
+        }
+      }
+    });
+  });
+}
+//删除单条数据
+function del(id){
+  obj = $("a[delname="+id+"]");
+  layer.confirm('确认要删除吗',function(index){
+    $.get("/adminlists/delete",{id:id},function(data){
+      if(data){
+        if(data['code']==0){
+          layer.msg(data['msg'],{icon:2,time:3000});
+        }else{
+          $(obj).parents("tr").remove();
+          layer.msg('删除数据成功!',{icon: 1,time:1000});
+        }
+      }
+    });
+  });
+}
+
+// 全选
+$("#btn1").click(function(){
+  $("#dels").find("tr").each(function(){
+    $(this).find(":checkbox").attr("checked",true);
+  })
+});
+//全不选
+$("#btn2").click(function(){
+  $("#dels").find("tr").each(function(){
+    $(this).find(":checkbox").attr("checked",false);
+  })
+});
+//反选
+$("#btn3").click(function(){
+  $("#dels").find("tr").each(function(){
+    if($(this).find(":checkbox").attr("checked")){
+      $(this).find(":checkbox").attr("checked",false);
+    }else{
+      $(this).find(":checkbox").attr("checked",true);
+    }
+  })
+
+});
+
+//多条数据批量删除
+$("#moredel").click(function(){
+  layer.confirm('确认要删除吗',function(index){
+    arr = [];
+    var id;
+    $("#dels").find("tr").each(function(){
+        if($(this).find(":checked").attr("checked")){
+          id =$(this).find(":checked").val();
+          arr.push(id);
+        }
+    });
+    $.get("/adminlists/moredel",{arr:arr},function(data){
+      if(data){
+        if(data['code']==0){
+          layer.msg(data['msg'],{icon:2,time:3000});
+        }else{
+          //把删除的数据所在的tr从dom删除
+          for(var i=0;i<arr.length;i++){
+            $(":input[value="+arr[i]+"]").parents("tr").remove();
+          }
+          layer.msg("删除数据成功",{icon:1,time:3000});
+        }
+      }else{
+        layer.msg("请选择至少一条数据",{icon:5,time:3000});
+      }
+    });
+  });
+});
+</script>
+{/block}
+{block name="title"}管理员用户列表{/block}
+{block name="style"}style="display:block"{/block}
+{block name="menu"}open{/block}

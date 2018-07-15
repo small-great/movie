@@ -1,0 +1,125 @@
+{extend name="AdminPublic:public"/}
+{block name="main"}
+<style>.table td{text-align:center;}.iradio-blue{line-height:50px}</style>
+  <div id="content-header">
+    <div id="breadcrumb">
+     <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+     <a href="/admin/list" class="current">影片管理</a><a href="/admin/add" class="current">添加影片</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+    </div>
+   </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+              <h5>修改影片</h5>
+            </div>
+         <div class="widget-content nopadding">
+              <form class="form-horizontal" action="/Movie/update" method="post" name="basic_validate" id="basic_validate" novalidate="novalidate" enctype="multipart/form-data">
+                <div class="control-group">
+                  <label class="control-label">影片中文名称：</label>
+                  <div class="controls">
+                  	 <span style="line-height:32px">{$info.ch_name}</span>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">影片英文名称：</label>
+                  <div class="controls">
+                    <span style="line-height:32px">{$info.en_name}
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">类型：</label>
+                  <div class="controls">
+                    <span style="line-height:32px">{$info.m_type}
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">国家：</label>
+                  <div class="controls">
+                    <span style="line-height:32px">{$info.country_area}
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">电影总时长：</label>
+                  <div class="controls">
+                  	<span style="line-height:32px">{$info.m_time}分钟
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">版本：</label>
+                  <div class="controls">
+					 <span style="line-height:32px">{if condition="$info.m_version==0"}2D/3D{/if}
+                     {if condition="$info.m_version==1"}3D{/if}
+                     {if condition="$info.m_version==2"}2D{/if}
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">导演：</label>
+                  <div class="controls">
+                   <span style="line-height:32px">{$info.m_director}
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">主演：</label>
+                  <div class="controls">
+                    <span style="line-height:32px">{$info.m_actor}
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">单价：</label>
+                  <div class="controls">
+                    <span style="line-height:32px">{$info.m_price}元起
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">剩余量：</label>
+                  <div class="controls">
+                    <span style="line-height:32px">{$info.surplus}张</span>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">上映时间：</label>
+                  <div class="controls">
+                    <span style="line-height:32px">{$info.m_addtime}</span>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">语言：</label>
+                  <div class="controls">
+                    <span style="line-height:32px">{$info.laguage}</span>
+                  </div>
+                </div>
+                <div class="control-group">
+	              <label class="control-label">图片：</label>
+	              <div class="controls">
+	                <img src="{$info.picurl}" width="30">
+	              </div>
+	            </div>
+               <div class="control-group">
+                  <label class="control-label">状态/预告/上映：</label>
+                  <div class="controls">
+                  <span style="line-height:32px">
+                  	{if condition="$info.status==0"}预告{/if}
+              	  	{if condition="$info.status==1"}上映{/if}
+              	  </span>
+              	  </div>
+               </div>
+				<div class="control-group">
+	              <label class="control-label">剧情简介：</label>
+	              <div class="controls">
+	               <span style="line-height:32px">{$info.content}</span>
+	              </div>
+	            </div>
+              </form>
+            </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{/block}
+{block name="title"}影片详情{/block}
+{block name="style3"}style="display:block"{/block}
+{block name="menu3"}open{/block}

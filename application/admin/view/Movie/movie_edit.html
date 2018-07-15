@@ -1,0 +1,196 @@
+{extend name="AdminPublic:public"/}
+{block name="main"}
+<style>.table td{text-align:center;}.iradio-blue{line-height:50px}#label label{display:inline-block;margin-right:8px;margin-top:5px;}#label label input{margin-top:0;}</style>
+  <div id="content-header">
+    <div id="breadcrumb">
+     <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+     <a href="/movie/list" class="current">影片管理</a><a href="/movie/edit/id/{$info['id']}" class="current">修改影片</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+    </div>
+   </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+              <h5>修改影片</h5>
+            </div>
+            <div class="widget-content nopadding">
+              <form class="form-horizontal" action="/Movie/update" method="post" name="basic_validate" id="basic_validate" novalidate="novalidate" enctype="multipart/form-data">
+              	<input type="hidden" name="id" value="{$info['id']}">
+                <div class="control-group">
+                  <label class="control-label">影片中文名称</label>
+                  <div class="controls">
+                    <input type="text" name="ch_name" id="ch_name" value="{$info.ch_name}">
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">影片英文名称</label>
+                  <div class="controls">
+                    <input type="text" name="en_name" id="en_name" value="{$info.en_name}">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">类型</label>
+                  <div class="controls" id="label">
+                  	<span>{$info.m_type}</span><br/>
+                  	<input type="hidden" name="m_type1" value="{$info.m_type}">
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="爱情"><span>爱情</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="喜剧"><span>喜剧</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="动画"><span>动画</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="剧情"><span>剧情</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="恐怖"><span>恐怖</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="惊悚"><span>惊悚</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="科幻"><span>科幻</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="动作"><span>动作</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="悬疑"><span>悬疑</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="冒险"><span>冒险</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="战争"><span>战争</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="奇幻"><span>奇幻</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="运动"><span>运动</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="家庭"><span>家庭</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="古装"><span>古装</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="武侠"><span>武侠</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="西部"><span>西部</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="历史"><span>历史</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="传记"><span>传记</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="黑色电影"><span>黑色电影</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="短片"><span>短片</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="纪录片"><span>纪录片</span></label>
+                    <label><input type="checkbox" name="m_type[]" id="m_type" value="其他"><span>其他</span></label>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">国家</label>
+                  <div class="controls">
+                    <input type="text" name="country_area" id="country_area" value="{$info.country_area}">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">电影总时长(分钟)</label>
+                  <div class="controls">
+                    <input type="text" name="m_time" id="m_time" value="{$info.m_time}">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">版本</label>
+                  <div class="controls">
+                    <select name="m_version" id="m_version">
+                      <option value="0" {if condition="$info.m_version==0"}selected{/if}>2D</option>
+                      <option value="1" {if condition="$info.m_version==1"}selected{/if} >3D</option>
+                      <option value="2" {if condition="$info.m_version==2"}selected{/if}>2D/3D</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">导演</label>
+                  <div class="controls">
+                    <input type="text" name="m_director" id="m_director" value="{$info.m_director}">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">主演</label>
+                  <div class="controls">
+                    <input type="text" name="m_actor" id="m_actor" value="{$info.m_actor}">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">单价(元)起</label>
+                  <div class="controls">
+                    <input type="text" name="m_price" id="m_price" value="{$info.m_price}">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">剩余量(张)</label>
+                  <div class="controls">
+                    <input type="text" name="surplus" id="surplus" value="{$info.surplus}">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">上映时间</label>
+                  <div class="controls">
+                    <input type="text" name="m_addtime" id="m_addtime" onClick="WdatePicker({skin:'default',Date:'%y-%M-%d',maxDate:'2099-12-30'})" class="Wdate" autocomplete="off" value="{$info.m_addtime}">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">语言</label>
+                  <div class="controls">
+                    <input type="text" name="laguage" id="laguage" value="{$info.laguage}">
+                  </div>
+                </div>
+                <div class="control-group">
+	              <label class="control-label">图片</label>
+	              <div class="controls">
+	                <input type="file" size="19" style="opacity: 1;" id="picurl" name="picurl" value="">
+	                <img src="{$info.picurl}" width="30">
+	              </div>
+	            </div>
+               <div class="control-group">
+                  <label class="control-label">状态/预告/上映</label>&nbsp;
+                  <label class="radio" style="margin-left:35px;line-height:40px"><input type="radio" name="status" id="status" style="margin-top:14px" value="0" {if condition="$info.status==0"}checked{/if}>预告</label>
+                 <label class="radio" style="margin-left:35px;line-height:40px"><input type="radio" name="status" id="status" style="margin-top:14px" value="1" {if condition="$info.status==1"}checked{/if}>上映</label>
+               </div>
+				<div class="control-group">
+	              <label class="control-label">剧情简介</label>
+	              <div class="controls">
+	                <textarea class="span6" name="content" maxlength="300">{$info.content}</textarea>
+	              </div>
+	            </div>
+                <div class="form-actions">
+                  <input type="submit" value="提交" class="btn btn-success">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="/static/admins/js/excanvas.min.js"></script>
+<script src="/static/admins/js/jquery.min.js"></script>
+<script src="/static/admins/js/jquery.ui.custom.js"></script>
+<script src="/static/admins/js/bootstrap.min.js"></script>
+<script src="/static/admins/js/jquery.flot.min.js"></script>
+<script src="/static/admins/js/jquery.flot.resize.min.js"></script>
+<script src="/static/admins/js/jquery.peity.min.js"></script>
+<script src="/static/admins/js/fullcalendar.min.js"></script>
+<script src="/static/admins/js/matrix.js"></script>
+<script src="/static/admins/js/matrix.dashboard.js"></script>
+<script src="/static/admins/js/jquery.gritter.min.js"></script>
+<script src="/static/admins/js/matrix.interface.js"></script>
+<script src="/static/admins/js/matrix.chat.js"></script>
+<script src="/static/admins/js/jquery.validate.js"></script>
+<script src="/static/admins/js/matrix.form_validation.js"></script>
+<script src="/static/admins/js/jquery.wizard.js"></script>
+<script src="/static/admins/js/jquery.uniform.js"></script>
+<script src="/static/admins/js/select2.min.js"></script>
+<script src="/static/admins/js/matrix.popover.js"></script>
+<script src="/static/admins/js/jquery.dataTables.min.js"></script>
+<script src="/static/admins/js/matrix.tables.js"></script>
+<script type="text/javascript">
+  // This function is called from the pop-up menus to transfer to
+  // a different page. Ignore if the value returned is a null string:
+  function goPage (newURL) {
+
+      // if url is empty, skip the menu dividers and reset the menu selection to default
+      if (newURL != "") {
+
+          // if url is "-", it is this page -- reset the menu:
+          if (newURL == "-" ) {
+              resetMenu();
+          }
+          // else, send page to designated URL
+          else {
+            document.location.href = newURL;
+          }
+      }
+  }
+
+// resets the menu selection upon entry to this page:
+function resetMenu() {
+   document.gomenu.selector.selectedIndex = 2;
+}
+</script>
+{/block}
+{block name="style3"}style="display:block"{/block}
+{block name="menu3"}open{/block}

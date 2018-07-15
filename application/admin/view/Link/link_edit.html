@@ -1,0 +1,83 @@
+{extend name="AdminPublic:public"/}
+{block name="main"}
+<style>.table td{text-align:center;}.iradio-blue{line-height:50px}</style>
+  <div id="content-header">
+    <div id="breadcrumb">
+     <a href="/link/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+     <a href="/link/list" class="current">友情链接管理</a><a href="JavaScript:;" class="current">修改友情链接</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+    </div>
+   </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+              <h5>修改友情链接</h5>
+            </div>
+            <div class="control-group">
+                  <label class="control-label">链接类型</label>&nbsp;
+                  <label class="radio" style="margin-left:35px;line-height:40px">
+
+                  	<input type="radio" name="k_type" id="k_type" style="margin-top:14px" value="0" {if condition="$info.k_type==0"}checked{/if}>文字链接</label>
+                 <label class="radio" style="margin-left:35px;line-height:40px"><input type="radio" name="k_type" id="k_type" style="margin-top:14px" value="1" {if condition="$info.k_type==1"}checked{/if}>LOGO链接</label>
+               </div>
+            <div class="widget-content nopadding">
+              <form class="form-horizontal" action="/Link/update" method="post" name="basic_validate" id="basic_validate" novalidate="novalidate" enctype="multipart/form-data">
+              	<input type="hidden" name="id" value="{$info['id']}">
+                <div class="control-group">
+                  <label class="control-label">网站名称</label>
+                  <div class="controls">
+                    <input type="text" name="title" id="title" value="{$info.title}">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">网站地址</label>
+                  <div class="controls">
+                    <input type="text" name="url" id="url" value="{$info.url}">
+                  </div>
+                </div>
+                <div class="control-group">
+  	              <label class="control-label">网站LOGON</label>
+  	               <div class="controls">
+  	                <img src="{$info.k_pic}" alt="">
+  	              </div>
+  	            </div>
+  	            <div class="control-group">
+                  <label class="control-label">上传LOGON</label>
+                  <div class="controls">
+                    <input type="file" size="19" style="opacity:1;" id="img_url" name="k_pic">
+                  </div>
+                </div>
+                <div class="control-group">
+	              <label class="control-label">网站简述</label>
+	              <div class="controls">
+	                <textarea class="span6" name="desc">{$info.desc}</textarea>
+	              </div>
+	            </div>
+	            <div class="control-group">
+                  <label class="control-label">添加时间</label>
+                  <div class="controls">
+                    <input type="text" name="k_addtime" id="k_addtime" onClick="WdatePicker({skin:'default',minDate:'%y-%M-%d',maxDate:'2099-12-30'})" class="Wdate" autocomplete="off" value="{$info.k_addtime|date='Y-m-d',###}">
+                  </div>
+                </div>
+               <div class="control-group">
+                  <label class="control-label">前台是否显示</label>&nbsp;
+                  <label class="radio" style="margin-left:35px;line-height:40px">
+
+                  	<input type="radio" name="display" id="display" style="margin-top:14px" value="0" {if condition="$info.display==0"}checked{/if}>是</label>
+                 <label class="radio" style="margin-left:35px;line-height:40px"><input type="radio" name="display" id="display" style="margin-top:14px" value="1" {if condition="$info.display==1"}checked{/if}>否</label>
+               </div>
+                <div class="form-actions">
+                  <input type="submit" value="提交" class="btn btn-success">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{/block}
+{block name="title"}友情链接添加{/block}
+{block name="style10"}style="display:block"{/block}
+{block name="menu10"}open{/block}

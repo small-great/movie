@@ -1,0 +1,265 @@
+{extend name="AdminPublic:public"}
+{block name="main"}
+<style>
+  .thumbnails{margin:0px;}
+  .thumbnails li{margin:0px;}
+  .gradeA td{line-height:40px}
+</style>
+ <div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+   <a href="/grade/list" class="current">评分管理</a><a href="/grade/list" class="current">评分列表</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+<div class="container-fluid">
+  <div class="row-fluid">
+   <div class="span12">
+    <div class="widget-box">
+     <div class="widget-title">
+      <span class="icon"><i class="icon-th"></i></span>
+      <h5>评分列表</h5>
+     </div>
+     <div class="widget-content nopadding">
+      <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
+       <div class="">
+        <div id="DataTables_Table_0_length" class="dataTables_length">
+          <a href="/movie/add" class="btn btn-primary" style="visibility:hidden;">添加评分</a>
+        </div>
+       </div>
+       <table class="table table-bordered data-table dataTable" id="DataTables_Table_0">
+        <thead>
+         <tr role="row">
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 21px;">
+           <div class="DataTables_sort_wrapper">
+      选择
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 21px;">
+           <div class="DataTables_sort_wrapper">
+            ID
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+    <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 81px;">
+           <div class="DataTables_sort_wrapper">
+            用户名
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 118px;">
+
+           <div class="DataTables_sort_wrapper">
+           电影名
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 106px;">
+           <div class="DataTables_sort_wrapper">
+            评分
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 106px;">
+           <div class="DataTables_sort_wrapper">
+            内容
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 106px;">
+           <div class="DataTables_sort_wrapper">
+           点赞数
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+           <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 36px;">
+           <div class="DataTables_sort_wrapper">
+           想看
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 106px;">
+           <div class="DataTables_sort_wrapper">
+           状态
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 106px;">
+           <div class="DataTables_sort_wrapper">
+            操作
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+
+         </tr>
+        </thead>
+        <tbody role="alert" aria-live="polite" aria-relevant="all" id="dels">
+        {foreach name="data" item="row"}
+         <tr class="gradeA odd text-center" >
+          <td class="  sorting_1">
+            <input type="checkbox" value="{$row.id}">
+          </td>
+          <td class="">{$row.id}</td>
+          <td class="">{$row.uname}</td>
+          <td class="">{$row.mname}</td>
+          <td class="">{$row.grade}</td>
+          <td class="">{$row.g_content}</td>
+          <td class="">{$row.good}</td>
+          <td class="">{$row.want}</td>
+          <td class="td-status">{if condition="$row.g_status==1"}<span class="btn btn-mini btn-inverse">隐藏</span>{else}<span class="btn btn-mini btn-warning">显示</span></td>{/if}
+          <td class="td-manage">
+            {if condition='$row.g_status==1'}
+            <a href="JavaScript:;" onclick="start('{$row.id}')" idname="{$row.id}" class="btn btn-mini btn-warning"  title="显示"><i class="icon  icon-ok-sign"></i></a>
+            {else}
+            <a href="JavaScript:;" onclick="stop('{$row.id}')" idname="{$row.id}" class="btn btn-mini btn-inverse"  title="隐藏"><i class="icon icon-minus-sign"></i></a>
+            {/if}
+            <a href="JavaScript:;" onclick="del({$row.id})" delname="{$row.id}" class="btn btn-mini btn-danger" title="删除"><i class="icon icon-remove"></i></a>
+          </td>
+         </tr>
+         {/foreach}
+          <tr>
+            <td colspan="4" style="text-align:left">
+              <a href="javascript:void(0)" class="btn btn-success allchoose">全选</a> <a href="javascript:void(0)" class="btn btn-danger nochoose">全不选</a> <a href="javascript:void(0)" class="btn btn-info fchoose">反选</a>
+              <a href="javascript:void(0)" class="btn btn-success mdelete">批量删除</a>
+            </td>
+            <td  colspan="7" style="text-align:right;border-left:0px">
+              <div id="pages" style="position:absolute;right:10px">
+                  {$data->appends($request)->render()}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+       </table>
+          <div class="dataTables_filter" id="DataTables_Table_0_filter">
+            <form action="">
+              <input type="text" name="keywords" value="{$k}" aria-controls="DataTables_Table_0" placeholder="用户名/电影名/评分"><input type="submit" class="btn btn-info" value="搜索">
+            </form>
+          </div>
+           <div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers" id="DataTables_Table_0_paginate">
+          </div>
+        </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+</div>
+<script src="/static/admins/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admins/lib/layer/2.4/layer.js"></script>
+<script>
+// 启用
+function start(id){
+  obj = $("a[idname="+id+"]");
+  layer.confirm('确认要显示吗？',function(index){
+    $.get("/grade/change",{id:id,g_status:0},function(data){
+      if(data){
+        if(data['code']==0){
+          layer.msg(data['msg'],{icon:2,time:3000});
+        }else{
+          obj.parents("tr").find(".td-manage").prepend('<a href="JavaScript:;" onclick="stop('+id+')" idname="'+id+'" class="btn btn-mini btn-inverse"  title="显示"><i class="icon icon-minus-sign"></i></a>');
+          obj.parents("tr").find(".td-status").html('<span class="btn btn-mini btn-warning">显示</span>');
+          obj.remove();
+          layer.msg('已显示!',{icon: 6,time:1000});
+        }
+      }
+    });
+  });
+}
+
+//禁用
+function stop(id){
+   obj = $("a[idname="+id+"]");
+  layer.confirm('确认要隐藏吗？',function(index){
+    $.get("/grade/change",{id:id,g_status:1},function(data){
+      if(data){
+        if(data['code']==0){
+          layer.msg(data['msg'],{icon:2,time:3000});
+        }else{
+          obj.parents("tr").find(".td-manage").prepend('<a href="JavaScript:;" onclick="start('+id+')" idname="'+id+'" class="btn btn-mini btn-warning"  title="显示"><i class="icon  icon-ok-sign"></i></a>');
+          obj.parents("tr").find(".td-status").html('<span class="btn btn-mini btn-inverse">隐藏</span>');
+          obj.remove();
+          layer.msg('已隐藏!',{icon: 5,time:1000});
+        }
+      }
+    });
+  });
+}
+
+//删除单条数据
+function del(id){
+  obj = $("a[delname="+id+"]");
+  layer.confirm('确认要删除吗',function(index){
+    $.get("/grade/delete",{id:id},function(data){
+      if(data){
+        if(data['code']==0){
+          layer.msg(data['msg'],{icon:2,time:3000});
+        }else{
+          $(obj).parents("tr").remove();
+          layer.msg('删除数据成功!',{icon: 1,time:1000});
+        }
+      }
+    });
+  });
+}
+
+//全选
+$(".allchoose").click(function(){
+  $("#DataTables_Table_0").find("tr").each(function(){
+    $(this).find(":checkbox").attr("checked",true);
+
+  });
+
+});
+
+//全不选
+$(".nochoose").click(function(){
+  $("#DataTables_Table_0").find("tr").each(function(){
+    $(this).find(":checkbox").attr("checked",false);
+
+  });
+
+});
+
+//反选
+$(".fchoose").click(function(){
+  $("#DataTables_Table_0").find("tr").each(function(){
+    if($(this).find(":checkbox").attr("checked")){
+      $(this).find(":checkbox").attr("checked",false);
+
+    }else{
+      $(this).find(":checkbox").attr("checked",true);
+    }
+  });
+})
+
+//批量删除
+$('.mdelete').click(function(){
+    arr=[];
+    //获取选中数据的id
+    $(":checkbox").each(function(){
+        //判断
+        if($(this).attr("checked")){
+            //获取选中复选 id
+            id=$(this).val();
+            //添加元素到数组
+            arr.push(id);
+        }
+    });
+    //Ajax删除
+     layer.confirm('确定要彻底删除吗？',function(index){
+        $.get("/grade/mdelete",{arr:arr},function(data){
+        if(data){
+            if(data['code']==0){
+                layer.msg(data['msg'],{icon: 2,time:1000});
+            }else{
+                 //遍历
+                 for(var i=0;i<arr.length;i++){
+                    //把删除数据的tr从dom移除
+                    $("input[value="+arr[i]+"]").parents("tr").remove();
+                }
+                layer.msg('删除成功!',{icon: 1,time:1000});
+            }
+        }else{
+            layer.msg('至少选中一个!',{icon: 5,time:1000});
+        }
+        });
+   });
+});
+</script>
+{/block}
+{block name="title"}评分列表{/block}
+{block name="style6"}style="display:block"{/block}
+{block name="menu6"}open{/block}

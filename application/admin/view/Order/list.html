@@ -1,0 +1,225 @@
+{extend name="AdminPublic:public"}
+{block name="main"}
+ <div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+   <a href="/order/list" class="current">订单管理</a><a href="/order/list" class="current">订单列表</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+<div class="container-fluid">
+  <div class="row-fluid">
+   <div class="span12">
+    <div class="widget-box">
+     <div class="widget-title">
+      <span class="icon"><i class="icon-th"></i></span>
+      <h5>订单列表</h5>
+     </div>
+     <div class="widget-content nopadding">
+      <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
+        <div id="DataTables_Table_0_length" class="dataTables_length" style="margin-top:13px;margin-left:25px">
+          <form action="">
+              <label><input type="text" name="k" value="{$k}" placeholder="订单号/用户名" style="width:200px !important"><input type="submit" class="btn btn-info" value="搜索" style="position:relative;top:-6px"></label>
+            </form>
+        </div>
+       <table class="table table-bordered data-table dataTable" id="DataTables_Table_0">
+        <thead>
+         <tr role="row">
+         	<th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 21px;">
+           <div class="DataTables_sort_wrapper">
+			     选择
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 106px;">
+           <div class="DataTables_sort_wrapper">
+            订单号
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+            <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 21px;">
+           <div class="DataTables_sort_wrapper">
+            用户
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+            <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 81px;">
+           <div class="DataTables_sort_wrapper">
+            场次
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+		       <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 81px;">
+           <div class="DataTables_sort_wrapper">
+            影片
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 206px;">
+           <div class="DataTables_sort_wrapper">
+            影院
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 156px;">
+           <div class="DataTables_sort_wrapper">
+            座位
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 50px;">
+           <div class="DataTables_sort_wrapper">
+            数量
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+            </div></th>
+
+            <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 50px;">
+           <div class="DataTables_sort_wrapper">
+            单价
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+            </div></th>
+             <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 106px;">
+           <div class="DataTables_sort_wrapper">
+            状态
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+            </div></th>
+
+          <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 106px;">
+           <div class="DataTables_sort_wrapper">
+            操作
+            <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span>
+           </div></th>
+         </tr>
+        </thead>
+        <tbody role="alert" aria-live="polite" aria-relevant="all">
+        {foreach name="$order" item="row"}
+         <tr class="gradeA odd text-center">
+          <td class="  sorting_1">
+          	<input type="checkbox" value="{$row.id}">
+          </td>
+          <td class="">{$row.orderid}</td>
+          <td class="">{$row.uname}</td>
+          <td class="">{$row.relss}</td>
+          <td class="">{$row.mname}</td>
+          <td class="">{$row.cname}</td>
+          <td class="">{$row.seat}</td>
+          <td class="">{$row.num}</td>
+          <td class="">{$row.price}</td>
+          <td>{if condition="$row.status==0"}已支付(已取票){elseif condition="$row.status==1" }已支付(已取票){elseif condition="$row.status==2"}未支付{else}已退票{/if}</td>
+
+          <td class="td-manage">
+
+            <a href="/order/edit/id/{$row.id}" class="btn btn-mini btn-info" title="修改"><i class="icon icon-pencil"></i></a>
+            <a href="JavaScript:void(0);"  class="btn btn-mini btn-danger" delname="{$row['id']}" onclick="del({$row.id})" title="删除"><i class="icon icon-remove"></i></a>
+          </td>
+         </tr>
+          {/foreach}
+          <tr>
+          	<td colspan="5" style="text-align:left">
+				<a href="javascript:void(0)" class="btn btn-success allchoose">全选</a> <a href="javascript:void(0)" class="btn btn-danger nochoose">全不选</a> <a href="javascript:void(0)" class="btn btn-info fchoose">反选</a>
+				<a href="javascript:void(0)" class="btn btn-success dels">批量删除</a>
+          	</td>
+          	<td  colspan="6" style="text-align:right;border-left:0px">
+				<div id="pages" style="position:absolute;right:10px">
+           {$order->render()}
+           		</div>
+          	</td>
+          </tr>
+          <tr>
+       	  </tr>
+        </tbody>
+       </table>
+          <div class="dataTables_filter" id="DataTables_Table_0_filter">
+
+          </div>
+           <div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers" id="DataTables_Table_0_paginate">
+          </div>
+        </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+</div>
+<script src="/static/admins/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admins/lib/layer/2.4/layer.js"></script>
+<script>
+
+
+//jq和ajax删除
+function del(id){
+	//找到具体节点对象tr
+	ss=$("a[delname="+id+"]").parents("tr");
+	//layer插件
+	layer.confirm('确认要删除吗？',function(index){
+		//ajax交互数据 传入id
+		$.get("/order/del",{id:id},function(data){
+			//判断传回的数据
+			if(data){
+        if(data['code']==0){
+          layer.msg(data['msg'],{icon:2,time:3000});
+        }else{
+  				ss.remove();
+  				layer.msg('删除数据成功!',{icon: 1,time:2000});
+        }
+			}
+		});
+	});
+}
+
+//全选
+$(".allchoose").click(function(){
+	$("#DataTables_Table_0").find("tr").each(function(){
+		$(this).find(":checkbox").attr("checked",true);
+
+	});
+
+});
+
+//全不选
+$(".nochoose").click(function(){
+	$("#DataTables_Table_0").find("tr").each(function(){
+		$(this).find(":checkbox").attr("checked",false);
+
+	});
+
+});
+
+//反选
+$(".fchoose").click(function(){
+	$("#DataTables_Table_0").find("tr").each(function(){
+		if($(this).find(":checkbox").attr("checked")){
+			$(this).find(":checkbox").attr("checked",false);
+
+		}else{
+			$(this).find(":checkbox").attr("checked",true);
+		}
+	});
+})
+
+//ajax批量删除
+$(".dels").click(function(){
+	arr=[];
+	$(":checkbox").each(function(){
+		if($(this).attr("checked")){
+			id=$(this).val();
+			arr.push(id);
+		}
+
+	});
+
+	$.get("/order/delete",{arr:arr},function(data){
+    console.log(data);
+		if(data){
+      if(data['code']==0){
+        layer.msg(data['msg'],{icon:2,time:3000});
+      }else{
+  			for(var i=0;i<arr.length;i++){
+  				$("input[value="+arr[i]+"]").parents("tr").remove();
+  			}
+        layer.msg('删除数据成功!',{icon: 1,time:2000});
+      }
+		}else{
+			layer.msg('至少选择一条数据',{icon: 2,time:3000});
+		}
+	});
+})
+</script>
+{/block}
+{block name="title"}场次列表{/block}
+{block name="style4"}style="display:block"{/block}
+{block name="menu4"}open{/block}

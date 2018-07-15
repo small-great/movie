@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>电影列表</title>
+  <link rel="stylesheet" href="/static/homes/css/movie-list.22f5a22a.css"/>
+  <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+</head>
+<body>
+  {:widget("Publics/header")}
+  <div class="subnav" id="pid">
+    <ul class="navbar">
+      <li>
+        <a data-act="subnav-click" {if condition="$showType=='1'||$showType==''"} class="active" {/if} href="?showType=1">正在热映</a>
+      </li>
+      <li>
+        <a data-act="subnav-click" {if condition="$showType=='2'"} class="active" {/if} href="?showType=2">即将上映</a>
+      </li>
+    </ul>
+  </div>
+  <div class="container" id="app" class="page-movie/list" >
+  <div class="movies-channel">
+    <div class="tags-panel">
+    <ul class="tags-lines">
+      <li class="tags-line" data-val="{tagTypeName:'cat'}">
+        <div class="tags-title">类型 :</div>
+        <ul class="tags">
+        	{foreach name="type" item="row"}
+          <li {if condition="$key==$typeid"} class="active"{/if}>
+            <a data-act="tag-click"   href="?typeid={$key}{if condition='!empty($countryid)'}&countryid={$countryid}{/if}{if condition='!empty($addtimeid)'}&addtimeid={$addtimeid}{/if}{if condition='!empty($showType)'}&showType={$showType}{/if}" style="margin:0 1px">{$row}</a>
+
+          </li>
+ 			{/foreach}
+        </ul>
+      </li>
+
+      <li class="tags-line tags-line-border" data-val="{tagTypeName:'source'}">
+        <div class="tags-title">区域 :</div>
+        <ul class="tags">
+        	{foreach name="country" item="row1"}
+          <li {if condition="$key==$countryid"} class="active"{/if} >
+            <a data-act="tag-click" href="?countryid={$key}{if condition='!empty($typeid)'}&typeid={$typeid}{/if}{if condition='!empty($addtimeid)'}&addtimeid={$addtimeid}{/if}{if condition='!empty($showType)'}&showType={$showType}{/if}" >{$row1}</a>
+          </li>
+          {/foreach}
+
+        </ul>
+      </li>
+      <li class="tags-line tags-line-border" data-val="{tagTypeName:'year'}">
+        <div class="tags-title">年代 :</div>
+        <ul class="tags">
+          <li {if condition="$addtimeid==null||$addtimeid=='全部'"}class="active"{/if}>
+            <a data-act="tag-click" href="?addtimeid=全部{if condition='!empty($typeid)'}&typeid={$typeid}{/if}{if condition='!empty($countryid)'}&countryid={$countryid}{/if}{if condition='!empty($showType)'}&showType={$showType}{/if}">全部</a>
+          </li>
+        	{foreach name="addtime" item="row2"}
+          <li {if condition="$row2==$addtimeid"}class="active"{/if} >
+            <a data-act="tag-click" href="?addtimeid={$row2}{if condition='!empty($typeid)'}&typeid={$typeid}{/if}{if condition='!empty($countryid)'}&countryid={$countryid}{/if}{if condition='!empty($showType)'}&showType={$showType}{/if}">{$row2}</a>
+          </li>
+           {/foreach}
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="movies-panel">
+    <div class="movies-list">
+
+    <dl class="movie-list">
+
+{foreach name="data" item="rows"}
+  <dd>
+    <div class="movie-item">
+      <a href="/content/{$rows.id}.html" target="_blank">
+      <div class="movie-poster">
+        <img class="poster-default" src="/static/homes/picture/loading_2.e3d934bf.png" />
+        <img data-src="{$rows.picurl}" />
+      </div>
+      </a>
+        <div class="channel-action channel-action-sale">
+  <a>购票</a>
+</div>
+
+      <div class="movie-ver"></div>
+    </div>
+
+    <div class="channel-detail movie-item-title" title="{$rows.ch_name}">
+      <a href="/content/{$rows.id}.html" target="_blank">{$rows.ch_name}</a>
+    </div>
+    {if condition="$rows.grade!='0.0'"}
+<div class="channel-detail channel-detail-orange"><i class="integer">{$rows.grade|floor}.</i><i class="fraction">{$rows.grade|substr="-1"|}</i></div>{else}<div class="channel-detail channel-detail-orange">暂无评分</div>{/if}
+{/foreach}
+</dl>
+    </div>
+
+    <div  id="pages" style="text-align:center">
+    <ul class="pagination" >
+    <li ><a href="/movielist?{if condition='!empty($showType)'}showType={$showType}&{/if}page={$prev}"><<</a></li>
+      {volist name="pp" id="rowss" offset="0" length="$m"}
+      <li {if condition="$rowss==$page"}class="active"{/if}><a href="/movielist?{if condition='!empty($showType)'}showType={$showType}&{/if}page={$rowss}" >{$rowss}</a></li>
+      {/volist}
+     <li ><a href="/movielist?{if condition='!empty($showType)'}showType={$showType}&{/if}page={$next}" onclick="page('next')">>></a></li>
+    </ul>
+    </div>
+  </div>
+</div>
+    </div>
+  {:widget("Publics/footer")}
+</body>
+<script src="/static/homes/js/common.dc33ab40.js" ></script>
+<script src="/static/homes/js/profile-profile.be74a9c6.js"></script>
+<script>
+</script>
+</html>

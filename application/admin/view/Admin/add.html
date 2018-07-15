@@ -1,0 +1,51 @@
+<!-- 模态框（Modal） -->
+<div class="modal fade " style="width:800px;display:none !important" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog " >
+    <div class="modal-content " >
+      <div class="modal-header ">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          管理员管理
+        </h4>
+      </div>
+      <div class="modal-body">
+          <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+              <h5>添加管理员</h5>
+            </div>
+            <div class="widget-content nopadding">
+              <form class="form-horizontal" action="/admin/insert" method="post"  name="basic_validate" id="basic_validate" novalidate="novalidate">
+                <div class="control-group">
+                  <label class="control-label">管理员名称</label>
+                  <div class="controls">
+                    <input type="text" name="name" id="name" placeholder="请填写以英文数字字母的组合">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">密  码</label>
+                  <div class="controls">
+                    <input type="password" name="password" id="password" placeholder="6-18位英文数字字母下划线">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">确认密码</label>
+                  <div class="controls">
+                    <input type="password" name="repassword" id="repassword" placeholder="6-18位英文数字字母下划线">
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <input type="submit" value="提交" class="btn btn-success">
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+        </button>
+      </div>
+    </div>
+  </div>

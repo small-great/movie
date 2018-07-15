@@ -1,0 +1,63 @@
+{extend name="AdminPublic:public"}
+{block name="main"}
+<div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+   <a href="/admin/list" class="current">管理员管理</a><a href="JavaScript:;" class="current">添加详情</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+<div class="container-fluid">
+  <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+            <h5>添加管理员详情</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <form class="form-horizontal" method="post" action="/admin/addinfo" name="basic_validate" id="basic_validate" novalidate="novalidate">
+              <div class="control-group">
+                <label class="control-label">名称</label>
+                <div class="controls">
+                  <label class="radio">{$name}</label>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">性别</label>
+                <div class="controls">
+                  <label class="radio" style="margin-left:35px;"><input type="radio" name="sex" id="sex" value="0" checked>男</label>
+                  <label class="radio" style="margin-left:36px;line-height:20px;margin-top:4px"><input type="radio" name="sex" id="sex" value="1">女</label>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">电话</label>
+                <div class="controls">
+                  <input type="text" name="phone" id="phone" maxlength="11" placeholder="#请输入手机号">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">邮箱</label>
+                <div class="controls">
+                  <input type="text" name="email" id="email" placeholder="@请输入邮箱号">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">描述</label>
+                <div class="controls">
+                  <textarea id="" cols="30" rows="5" name="content"></textarea>
+                </div>
+              </div>
+              <div class="form-actions">
+                <input type="hidden" value="{$id}" name="aid" class="btn btn-success">
+                <input type="submit" value="提交" class="btn btn-success">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block}
+{block name="title"}添加管理员详情{/block}
+{block name="style"}style="display:block"{/block}
+{block name="menu"}open{/block}

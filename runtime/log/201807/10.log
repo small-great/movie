@@ -1,0 +1,272 @@
+---------------------------------------------------------------
+[ 2018-07-10T11:05:57+08:00 ] 127.0.0.1 GET /
+[ sql ] [ DB ] CONNECT:[ UseTime:0.131008s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `movies` [ RunTime:0.095005s ]
+[ sql ] [ SQL ] SELECT * FROM `movies` WHERE  `display` = 0  AND `status` = 1 [ RunTime:0.010001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `grade` [ RunTime:0.010000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 26 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 31 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 32 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 33 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 34 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 35 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 36 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 37 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 38 [ RunTime:0.003001s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 39 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 41 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 45 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 46 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `movies` WHERE  `display` = 0  AND `status` = 1 LIMIT 1 [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `movies` WHERE  `display` = 0  AND `status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 27  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 28  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 29  AND `g_status` = 0 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 30  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 40  AND `g_status` = 0 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 42  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 43  AND `g_status` = 0 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 44  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 47  AND `g_status` = 0 [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 48  AND `g_status` = 0 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 49  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `movies` WHERE  `display` = 0  AND `status` = 0 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `carousel` [ RunTime:0.015001s ]
+[ sql ] [ SQL ] SELECT * FROM `carousel` WHERE  `status` = 0 LIMIT 0,6 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ads` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT * FROM `ads` ORDER BY `id` DESC LIMIT 1 [ RunTime:0.011001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users_info` [ RunTime:0.017001s ]
+[ sql ] [ SQL ] SELECT * FROM `users_info` WHERE  `uid` IS NULL LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `links` [ RunTime:0.008001s ]
+[ sql ] [ SQL ] SELECT * FROM `links` WHERE  `display` = 0 ORDER BY `lsort` ASC [ RunTime:0.005000s ]
+---------------------------------------------------------------
+[ 2018-07-10T11:06:06+08:00 ] 127.0.0.1 POST /register/mails
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003000s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users` [ RunTime:0.008000s ]
+[ sql ] [ SQL ] SELECT * FROM `users` WHERE  `username` = '1396506799@qq.com' [ RunTime:0.002001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users_info` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `users_info` WHERE  `email` = '1396506799@qq.com' [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2018-07-10T11:06:33+08:00 ] 127.0.0.1 POST /register/mails
+[ sql ] [ DB ] CONNECT:[ UseTime:0.004001s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `users` WHERE  `username` = '1396506799@qq.com' [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users_info` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `users_info` WHERE  `email` = '1396506799@qq.com' [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2018-07-10T11:06:47+08:00 ] 127.0.0.1 POST /register/mails
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007000s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users` [ RunTime:0.005000s ]
+[ sql ] [ SQL ] SELECT * FROM `users` WHERE  `username` = '1396506799@qq.com' [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users_info` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `users_info` WHERE  `email` = '1396506799@qq.com' [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2018-07-10T11:06:51+08:00 ] 127.0.0.1 POST /register/mail
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003000s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users` [ RunTime:0.003001s ]
+[ sql ] [ SQL ] INSERT INTO `users` (`username` , `password` , `addtime` , `token_str`) VALUES ('1396506799@qq.com' , 'e10adc3949ba59abbe56e057f20f883e' , 1531192007 , '3912de82fbaad1e456c5d646f98c81d1') [ RunTime:0.003000s ]
+---------------------------------------------------------------
+[ 2018-07-10T11:07:02+08:00 ] 127.0.0.1 GET /register/active/username/1396506799@qq.com/token_str/3912de82fbaad1e456c5d646f98c81d1
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003001s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT * FROM `users` WHERE  `username` = '1396506799@qq.com' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] UPDATE `users`  SET `token`=1,`token_str`='dddee8a3a7b144253f1a19451c0355f9'  WHERE  `username` = '1396506799@qq.com' [ RunTime:0.005000s ]
+---------------------------------------------------------------
+[ 2018-07-10T11:32:14+08:00 ] 127.0.0.1 POST /register/mails
+[ sql ] [ DB ] CONNECT:[ UseTime:0.005000s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `users` WHERE  `username` = '1396506799@qq.com' [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users_info` [ RunTime:0.003001s ]
+[ sql ] [ SQL ] SELECT * FROM `users_info` WHERE  `email` = '1396506799@qq.com' [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2018-07-10T11:32:28+08:00 ] 127.0.0.1 POST /register/mails
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users` [ RunTime:0.005000s ]
+[ sql ] [ SQL ] SELECT * FROM `users` WHERE  `username` = '1396506799@qq.com' [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users_info` [ RunTime:0.003001s ]
+[ sql ] [ SQL ] SELECT * FROM `users_info` WHERE  `email` = '1396506799@qq.com' [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2018-07-10T11:32:32+08:00 ] 127.0.0.1 POST /register/mail
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users` [ RunTime:0.005000s ]
+[ sql ] [ SQL ] INSERT INTO `users` (`username` , `password` , `addtime` , `token_str`) VALUES ('1396506799@qq.com' , 'e10adc3949ba59abbe56e057f20f883e' , 1531193548 , '661bb61111e10b69c269419382256667') [ RunTime:0.003000s ]
+---------------------------------------------------------------
+[ 2018-07-10T11:32:43+08:00 ] 127.0.0.1 GET /register/active/username/1396506799@qq.com/token_str/661bb61111e10b69c269419382256667
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003000s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users` [ RunTime:0.003001s ]
+[ sql ] [ SQL ] SELECT * FROM `users` WHERE  `username` = '1396506799@qq.com' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] UPDATE `users`  SET `token`=1,`token_str`='c2b934b3ff0b2ecc4d58fa964ce997d6'  WHERE  `username` = '1396506799@qq.com' [ RunTime:0.004000s ]
+---------------------------------------------------------------
+[ 2018-07-10T11:39:18+08:00 ] 127.0.0.1 POST /register/mails
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012000s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users` [ RunTime:0.004001s ]
+[ sql ] [ SQL ] SELECT * FROM `users` WHERE  `username` = '1396506799@qq.com' [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users_info` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `users_info` WHERE  `email` = '1396506799@qq.com' [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2018-07-10T11:39:36+08:00 ] 127.0.0.1 POST /register/mails
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012001s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT * FROM `users` WHERE  `username` = '1396506799@qq.com' [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users_info` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `users_info` WHERE  `email` = '1396506799@qq.com' [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2018-07-10T11:39:37+08:00 ] 127.0.0.1 POST /register/mail
+[ sql ] [ DB ] CONNECT:[ UseTime:0.004000s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] INSERT INTO `users` (`username` , `password` , `addtime` , `token_str`) VALUES ('1396506799@qq.com' , 'e10adc3949ba59abbe56e057f20f883e' , 1531193976 , 'a943e9d9ec34256f960b96ca04922dc3') [ RunTime:0.003000s ]
+---------------------------------------------------------------
+[ 2018-07-10T11:39:54+08:00 ] 127.0.0.1 GET /register/active/username/1396506799@qq.com/token_str/a943e9d9ec34256f960b96ca04922dc3
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003000s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `users` WHERE  `username` = '1396506799@qq.com' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] UPDATE `users`  SET `token`=1,`token_str`='b55346d3f2fb4bc6da3c8e6f5325ce92'  WHERE  `username` = '1396506799@qq.com' [ RunTime:0.004000s ]
+---------------------------------------------------------------
+[ 2018-07-10T17:20:31+08:00 ] 127.0.0.1 GET /
+[ sql ] [ DB ] CONNECT:[ UseTime:0.103006s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `movies` [ RunTime:0.079004s ]
+[ sql ] [ SQL ] SELECT * FROM `movies` WHERE  `display` = 0  AND `status` = 1 [ RunTime:0.014001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `grade` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 26 [ RunTime:0.005001s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 31 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 32 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 33 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 34 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 35 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 36 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 37 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 38 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 39 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 41 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 45 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 46 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `movies` WHERE  `display` = 0  AND `status` = 1 LIMIT 1 [ RunTime:0.005000s ]
+[ sql ] [ SQL ] SELECT * FROM `movies` WHERE  `display` = 0  AND `status` = 0 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 27  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 28  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 29  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 30  AND `g_status` = 0 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 40  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 42  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 43  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 44  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 47  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 48  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 49  AND `g_status` = 0 [ RunTime:0.002001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `movies` WHERE  `display` = 0  AND `status` = 0 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `carousel` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT * FROM `carousel` WHERE  `status` = 0 LIMIT 0,6 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ads` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `ads` ORDER BY `id` DESC LIMIT 1 [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users_info` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `users_info` WHERE  `uid` IS NULL LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `links` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `links` WHERE  `display` = 0 ORDER BY `lsort` ASC [ RunTime:0.003000s ]
+---------------------------------------------------------------
+[ 2018-07-10T20:15:18+08:00 ] 127.0.0.1 GET /
+[ sql ] [ DB ] CONNECT:[ UseTime:0.029001s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `movies` [ RunTime:0.014001s ]
+[ sql ] [ SQL ] SELECT * FROM `movies` WHERE  `display` = 0  AND `status` = 1 [ RunTime:0.006001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `grade` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 26 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 31 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 32 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 33 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 34 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 35 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 36 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 37 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 38 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 39 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 41 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 45 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 46 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `movies` WHERE  `display` = 0  AND `status` = 1 LIMIT 1 [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `movies` WHERE  `display` = 0  AND `status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 27  AND `g_status` = 0 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 28  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 29  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 30  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 40  AND `g_status` = 0 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 42  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 43  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 44  AND `g_status` = 0 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 47  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 48  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 49  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `movies` WHERE  `display` = 0  AND `status` = 0 LIMIT 1 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `carousel` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `carousel` WHERE  `status` = 0 LIMIT 0,6 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ads` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `ads` ORDER BY `id` DESC LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users_info` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `users_info` WHERE  `uid` IS NULL LIMIT 1 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `links` [ RunTime:0.003001s ]
+[ sql ] [ SQL ] SELECT * FROM `links` WHERE  `display` = 0 ORDER BY `lsort` ASC [ RunTime:0.002000s ]
+---------------------------------------------------------------
+[ 2018-07-10T20:26:49+08:00 ] 127.0.0.1 GET /
+[ sql ] [ DB ] CONNECT:[ UseTime:0.004000s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `movies` [ RunTime:0.005000s ]
+[ sql ] [ SQL ] SELECT * FROM `movies` WHERE  `display` = 0  AND `status` = 1 [ RunTime:0.002001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `grade` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 26 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 31 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 32 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 33 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 34 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 35 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 36 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 37 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 38 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 39 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 41 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 45 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 46 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `movies` WHERE  `display` = 0  AND `status` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `movies` WHERE  `display` = 0  AND `status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 27  AND `g_status` = 0 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 28  AND `g_status` = 0 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 29  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 30  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 40  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 42  AND `g_status` = 0 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 43  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 44  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 47  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 48  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 49  AND `g_status` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `movies` WHERE  `display` = 0  AND `status` = 0 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `carousel` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `carousel` WHERE  `status` = 0 LIMIT 0,6 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ads` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ads` ORDER BY `id` DESC LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users_info` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT * FROM `users_info` WHERE  `uid` IS NULL LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `links` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `links` WHERE  `display` = 0 ORDER BY `lsort` ASC [ RunTime:0.001001s ]
+---------------------------------------------------------------
+[ 2018-07-10T20:26:52+08:00 ] 127.0.0.1 GET /movielist
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003000s ] mysql:host=192.168.36.201;dbname=shenlan;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `movies` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT * FROM `movies` WHERE  `m_type` LIKE '%%'  AND `country_area` LIKE '%%'  AND `m_addtime` LIKE '%%'  AND `display` = 0  AND `status` = 1 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `movies` WHERE  `display` = 0  AND `status` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `grade` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 26 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 31 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 32 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 33 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 34 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 35 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 36 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 37 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 38 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 39 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 41 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 45 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `grade` WHERE  `mid` = 46 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ads` [ RunTime:0.003001s ]
+[ sql ] [ SQL ] SELECT * FROM `ads` ORDER BY `id` DESC LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `users_info` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `users_info` WHERE  `uid` IS NULL LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `links` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `links` WHERE  `display` = 0 ORDER BY `lsort` ASC [ RunTime:0.001000s ]

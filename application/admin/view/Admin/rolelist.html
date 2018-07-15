@@ -1,0 +1,37 @@
+{extend name="AdminPublic:public"}
+{block name="main"}
+ <div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+   <a href="/role/index" class="current">角色管理</a><a href="JavaScript:;" class="current">分配角色</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+            <h5>当前用户 <span style="color:blue">{$info.name}</span> 的角色信息</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <form class="form-horizontal" action="/admin/saverole" method="post" name="basic_validate" id="basic_validate" novalidate="novalidate">
+            {foreach name="role" item="row"}
+            <div class="control-group">
+                <label class="checkbox" style="margin-left:35px;line-height:40px"><input type="checkbox" name="rid[]" id="" style="margin-top:14px" value="{$row.id}" {if condition="in_array($row.id,$rids)"}checked{/if}>{$row.name}</label>
+            </div>
+            {/foreach}
+              <div class="form-actions">
+                <input type="hidden" value="{$info.id}" name="aid" class="btn btn-success">
+                <input type="submit" value="保存角色" class="btn btn-success">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block}
+{block name="title"}分配角色{/block}
+{block name="style"}style="display:block"{/block}
+{block name="menu"}open{/block}

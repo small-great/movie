@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>资讯</title>
+  <link rel="stylesheet" href="/static/homes/css/news-hotnews.a01df872.css"/>
+  <script src="/static/homes/public/js/jquery.js"></script>
+</head>
+<body>
+  {:widget("Publics/header")}
+    <div class="container" id="app" class="page-news/hotNews" >
+      <div class="hotIndex-container">
+    <div class="index-news-container clearfix">
+        <div class="popular-container">
+    <h4 class="red">热门资讯</h4>
+      <ul>
+          {foreach name="data1" item="row1"}
+          <li class="">
+            <div>
+                <div class="normal-link">
+                  <i class="ranking" id="{$key+1}" name="{$row1.id}" pic="{$row1.pic}">{$key+1}</i>
+                  <p class="top10-news-content">
+                    <a href="/newsinfo/id/{$row1.id}" data-act="news-click" data-val="{newsid:40511}">{$row1.title}</a>
+                  </p>
+                </div>
+            </div>
+          </li>
+          {/foreach}
+      </ul>
+  </div>
+
+        <div class="latest-container">
+      <h4 class="latest-header red">
+    最新资讯
+    <a href="/newslist" class="all-latest" data-act="all-news-click">
+      全部
+      <span class="arrow red-arrow"></span>
+    </a>
+  </h4>
+
+    <div class="latest-content clearfix">
+          {foreach name="data" item="row"}
+          <div class="latest-news-box">
+            <a href="/newsinfo/id/{$row.id}"  data-act="news-click" data-val="{newsid:40563}">
+              <img src="{$row.pic}" alt="">
+            </a>
+            <p class="latest-news-title">
+              <a href="/newsinfo" class="two-line" title="{$row.title}" data-act="news-click" data-val="{newsid:40563}">
+                {$row.title}
+              </a>
+            </p>
+            <div class="info-container">
+              <span>猫眼电影</span>
+              <span class="images-view-count view-count">{$row.hotnum}</span>
+            </div>
+          </div>
+          {/foreach}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  {:widget("Publics/footer")}
+</body>
+<script type="text/javascript">
+$(".ranking").each(function(){
+  id=$(this).attr('id');
+  pic=$(this).attr('pic');
+  nid=$(this).attr('name');
+  if(id=='1'){
+    $(this).next('p').find('a').prepend(' <div class="top-info-thumb"><a href="/newsinfo/id/'+nid+'" target="_blank" data-act="news-click"> <img src="'+pic+'"/> <i class="ranking top-info-icon red-bg">1</i> </a> </div>');
+    $("#1").css('display','none');
+  }
+
+  if(id=='2'){
+    $("#2").css('color','red');
+  }
+
+  if(id=='3'){
+    $("#3").css('color','red');
+  }
+});
+  
+</script>
+<script src="/static/homes/js/news-hotnews.dcc7a8ef.js"></script>
+</html>

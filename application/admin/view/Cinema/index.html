@@ -1,0 +1,208 @@
+{extend name="AdminPublic:public"/}
+{block name="main"}
+<link rel="stylesheet" href="/static/admins/contextMenu/css/contextMenu.css" />
+<script src="/static/admins/contextMenu/js/jquery-1.7.2.min.js"></script>
+<style>.table td{text-align:center;}.iradio-blue{line-height:50px} #restyle{margin-left: 5px;margin-bottom: 5px;display: inline-block;} #but{margin-left: 230px}
+</style>
+<div id="content-header">
+    <div id="breadcrumb">
+     <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+     <a href="/cinema/index" class="current">影院管理</a><a href="/cinema/index" class="current">影院区域分布管理</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+    </div>
+   </div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-info-sign"></i>
+                    </span>
+                    <h5>影城/影院管理</h5></div>
+                <div class="widget-content nopadding">
+
+                        <div class="findspan" style="width:1000px;margin-top:18px;margin-left:40px">
+                         <ul class="thumbnails">
+                            <li style="margin:0px" >
+                              <ul style="margin:0">
+                                  <li class="span2" >
+                                     <a>
+                                       <span class="label label-warning">
+                                          <h4>品牌</h4>
+                                       </span>
+                                    </a>
+                                  </li>
+                               </ul>
+                            </li>
+                        {foreach name="data" item="brand"}
+                           <li style="margin:0px">
+                              <ul style="margin:0">
+                                  <li class="span2" >
+                                     <a>
+                                       <span class="label label-info conmenu"  id="restyle" info="{$brand['id']}">
+                                          <h4>{$brand['brand']}</h4>
+                                       </span>
+                                    </a>
+                                          <div class="actions" style="margin-left:4px;width:35px;">
+                                              <a data-toggle="modal" data-target="#myModal{$brand['id']}" ><i class="icon-edit" ></i></a>
+                                              <a href="/cinema/del/id/{$brand['id']}" class="del"><i class="icon-remove"></i></a>
+                                          </div>
+                                  </li>
+                               </ul>
+                            </li>
+
+
+                            <!-- 模态框（Modal） -->
+                            <div class="modal fade" id="myModal{$brand['id']}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <form action="/cinema/edit" method="post">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">请完成修改</h4>
+                                        </div>
+                                        <!-- <div class="modal-body">在这里添加一些文本</div> -->
+                                        <div style="height:125px;">
+                                             <span style="font-size:24px;position:relative;top:30px;left:10px">品牌名修改:</span>
+                                             <center><input type="text" name="brand" value="{$brand['brand']}"></center>
+                                             <input type="hidden" name="id" value="{$brand['id']}">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                            <input type="submit" class="btn btn-primary"></input>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </form>
+                                </div><!-- /.modal -->
+                            </div>
+                        {/foreach}
+                        </ul>
+                        </div>
+
+
+
+
+                        <br>
+                        <br>
+                      <form class="form-horizontal" action="/cinema/brand_insert" method="post"  enctype="multipart/form-data" name="basic_validate" id="basic_validate" novalidate="novalidate" ; onsubmit="return check()">
+                        <div class="control-group">
+                            <label class="control-label" id="bcss">品牌/影院</label>
+                            <div class="controls">
+
+                                <select name="pid"  id="opbrand">
+                                    <option value="-1">---请选择---</option>
+                                    <option value="1">品牌</option>
+                                  {foreach name="data" item="row"}
+                                    <option value="{$row['id']}">{$row['brand']}</option>
+                                  {/foreach}
+                                 <!--  <input type="hidden" name='name' value="" id="hid"> -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group cbrand">
+                            <label class="control-label" id="bcs">添加品牌/影院</label>
+                            <div class="controls">
+                                <input type="text" name="brand" id="inp1"><font size="3" id="ft1"></font>
+                            </div>
+                        </div>
+
+                        <div class="control-group" id="pic" >
+                          <label class="control-label">上传影店图片</label>
+                          <div class="controls">
+                            <input type="file" size="19" name="pic" value="">
+                          </div>
+                        </div>
+
+                        <div class="control-group" id="address">
+                            <label class="control-label" id="divadderss">添加影店具体地址</label>
+                            <div class="controls">
+                                <textarea name="address" id="inp2"></textarea><font size="3" id="ft2"></font>
+                            </div>
+                        </div>
+                        <div class="control-group" id="price">
+                            <label class="control-label" id="divadderss">最低电影单价</label>
+                            <div class="controls">
+                                <input type="text" name="price" id="inp3">
+                            </div>
+                        </div>
+                        <div class="control-group" id="phone">
+                            <label class="control-label" id="divadderss">联系电话</label>
+                            <div class="controls">
+                                <input type="text" name="phone" id="inp4">
+                            </div>
+                        </div>
+                        <div class="form-actions" id="but">
+                            <input type="submit" value="提交" class="btn btn-success" id="butt">
+                            <input type="reset" value="重置" class="btn btn-info" id="reset">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+
+        $("#inp1").blur(function(){
+          //alert(10);
+            if ($("#inp1").val()=='') {
+              $("#inp1").next().css({ color: "#ff0011"}).html('&nbsp;&nbsp;&nbsp;请完成输入!!');
+          } else {
+              $("#inp1").next().css({ color: 'blue'}).html('&nbsp;&nbsp;&nbsp;Good!');
+          }
+        });
+        $("#inp2").blur(function(){
+            if ($("#inp2").val()=='') {
+              $("#inp2").next().css({ color: "#ff0011"}).html('&nbsp;&nbsp;&nbsp;请完成输入!!');
+          } else {
+              $("#inp2").next().css({ color: 'blue'}).html('&nbsp;&nbsp;&nbsp;Good!');
+          }
+        });
+
+       $("#opbrand").change(function(){
+          bb = $("#opbrand option:selected").val();
+          //console.log(aa);
+          if (bb == 1) {
+              $("#address").hide();
+              $("#price").hide();
+              $("#phone").hide();
+              $("#pic").hide();
+               $("#bcs").html('添加品牌名称');
+               $("#bcss").html('品牌');
+              // $(".cbrand").show();
+          } else {
+            $("#address").show();
+            $("#price").show();
+            $("#phone").show();
+             $("#pic").show();
+             $("#bcss").html('影院');
+            $("#bcs").html('添加影店名称');
+            // $(".cbrand").hide();
+          }
+      });
+
+
+    var check = function(){
+            if($("#opbrand option:selected").val() == -1){
+                return false;
+            }else{
+                return true;
+            }
+        }
+
+  $("#reset").click(function(){
+    $("#ft1").empty();
+    $("#ft2").empty();
+     $("#bcs").html('添加品牌/影店');
+     $("#bcss").html('品牌/影院');
+     $("#address").show();
+  });
+
+</script>
+
+
+{/block}
+{block name="style2"}style="display:block"{/block}
+{block name="menu2"}open{/block}

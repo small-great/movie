@@ -1,0 +1,159 @@
+{extend name="AdminPublic:public"/}
+{block name="main"}
+  <script>
+  cid = "c_2yzd0xp5";
+  ci = 20;
+  window.system = {"seatsPrice":{"1":{"expression":"","price":""}}};
+  window.openPlatform = '';
+  </script>
+ <!--  <link rel="stylesheet" href="/static/homes/css/common.4b838ec3.css"/> -->
+<link rel="stylesheet" href="/static/homes/css/cinemas-seat.d66e64ba.css"/>
+  <script src="/static/homes/js/stat.791ffac0.js"></script>
+  <style>
+    .col-id{margin:5px 15px;font-size:16px}
+    .row-id{margin:7px 0;margin-right:20px !important;margin-bottom:0;}
+    .seats-wrapper .row{margin-bottom:0;}
+    .seat{cursor:pointer;}
+    .seats-wrapper input{width:20px;height:30px;display:inline-block;position:relative;left:22px;bottom:15px;}
+  </style>
+ <div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i>首页</a>
+   <a href="/hall/list" class="current">放映厅管理</a><a href="/hall/edit" class="current">放映厅修改</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="widget-box">
+        <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+          <h5>添加放映厅</h5>
+        </div>
+        <div class="widget-content">
+          <!--设置号厅 -->
+          <div class="main">
+            <div class="screen-container">
+              <div class="screen">银幕中央</div>
+              <div class="c-screen-line"></div>
+            </div>
+            <div class="hall" >
+              <div style="margin-left:88px;margin-bottom:10px">
+                <span class="col-id">1</span>
+                <span class="col-id">2</span>
+                <span class="col-id">3</span>
+                <span class="col-id">4</span>
+                <span class="col-id">5</span>
+                <span class="col-id">6</span>
+                <span class="col-id">7</span>
+                <span class="col-id">8</span>
+                <span class="col-id">9</span>
+                <span class="col-id">10</span>
+                <span class="col-id">全选/全不选</span>
+              </div>
+              <div class="seats-block">
+                <div class="row-id-container" style="margin-top:0">
+                  <span class="row-id">1</span>
+                  <span class="row-id">2</span>
+                  <span class="row-id">3</span>
+                  <span class="row-id">4</span>
+                  <span class="row-id">5</span>
+                  <span class="row-id">6</span>
+                  <span class="row-id">7</span>
+                  <span class="row-id">8</span>
+                  <span class="row-id">9</span>
+                </div>
+                <div class="seats-wrapper"  style="margin-top:5px">
+                </div>
+                <button id="btn" class="btn btn-primary" style="position:relative;left:-60px;bottom:15px">保存座位位置</button>
+              </div>
+            </div>
+            <!-- 选择号厅 -->
+          <form class="form-horizontal" method="post" action="/hall/update" name="basic_validate" id="basic_validate" novalidate="novalidate">
+            <div class="control-group">
+              <label class="control-label">厅号名:</label>
+              <div class="controls">
+                 <input type="text" name="hallname" value="{$halls.hallname}">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">座位数:</label>
+              <div class="controls">
+                 <input type="text" name="hallnum" value="{$halls.hallnum}" readonly>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">座位形状:</label>
+              <div class="controls">
+                 <input type="text" name="hallLayout" value="{$halls.hallLayout}" class="span11" readonly >
+              </div>
+            </div>
+            <div class="form-actions">
+              <input type="hidden" name="id" value="{$halls.id}">
+              <input type="submit" value="提交" class="btn btn-success">
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/static/homes/js/common.dc33ab40.js"></script>
+<script src="/static/homes/js/cinemas-seat.f35e64e9.js"></script>
+<script>
+  function check(){
+    if($(this).attr("checked")==undefined||$(this).attr("checked")==false){
+      $(".row").find("span").removeClass("selectable").addClass("selected");
+      $(this).attr("checked",true);
+    }else{
+      $(".row").find("span").removeClass("selected").addClass("selectable");
+      $(this).attr("checked",false);
+    }
+  }
+  span = '';
+  for(var i=1;i<10;i++){
+    span += '<div class="row">';
+    for (var j=1; j <=10; j++) {
+      span += '<span class="seat selectable" data-column-id="0'+j+'"data-row-id="'+i+'"data-no="0000000000000001-'+i+'-0'+j+'"data-st="N"data-act="seat-click"data-bid="b_s7eiiijf"></span>';
+    };
+    if(i==1){
+      span += '<input type="checkbox" onchange="check()" id="checks"></div>';
+    }else{
+      span += '<input style="visibility:hidden" ></div>';
+    }
+  }
+  $('.seats-wrapper').html(span);
+  arr = [];
+  $("#btn").click(function(){
+    console.log(1);
+    var i=1;
+    var j=1;
+    var num = 0;
+    var str = '';
+    $('.row').find("span").each(function(){
+      console.log($(this)[0].className);
+      if($(this)[0].className=='seat selectable'){
+        str +='_';
+      }
+      if($(this)[0].className=='seat selected'){
+        str +='e';
+        num++;
+      }
+      if(i/10 == j){
+        str +=',';
+        j++;
+      }
+      i++;
+    });
+    console.log(str);
+    $("input[name='hallLayout']").val(str);
+    $("input[name='hallLayout']").attr("title",str);
+    $("input[name='hallnum']").val(num);
+  });
+</script>
+{/block}
+{block name="title"}放映厅修改{/block}
+{block name="style2"}style="display:block"{/block}
+{block name="menu2"}open{/block}

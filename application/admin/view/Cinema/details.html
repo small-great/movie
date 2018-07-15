@@ -1,0 +1,98 @@
+{extend name="AdminPublic:public"/}
+{block name="main"}
+<link rel="stylesheet" href="/static/admins/contextMenu/css/contextMenu.css" />
+<script src="/static/admins/contextMenu/js/jquery-1.7.2.min.js"></script>
+<style>.table td{text-align:center;}.iradio-blue{line-height:50px} #restyle{margin-left: 5px;margin-bottom: 5px;display: inline-block;} #but{margin-left: 230px}
+</style>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-info-sign"></i>
+                    </span>
+                    <h5>影院详情修改</h5></div>
+                <div class="widget-content nopadding">
+
+                       
+                       
+                      <form class="form-horizontal" action="/cinema/details_update" method="post"  enctype="multipart/form-data" name="basic_validate" id="basic_validate" novalidate="novalidate" ; onsubmit="return check()">
+                        <div class="control-group">
+                            <label class="control-label" id="bcss">影院</label>
+                            <div class="controls">
+                                <select name="pid"  id="opbrand">
+                                    <option >---请选择---</option>
+                                    <!-- <option value="1">品牌</option> -->
+                                  {foreach name="brand" item="row"}
+                                    <option value="{$row['id']}"{if condition="$row['id'] == $data['pid']"}selected{/if}>{$row['brand']}</option>
+                                  {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group cbrand">
+                            <label class="control-label" id="bcs">影店名</label>
+                            <div class="controls">
+                                <input type="text" name="brand" id="inp1" value="{$data['name']}"><font size="3" id="ft1"></font>
+                            </div>
+                        </div>
+
+                        <div class="control-group cbrand">
+                            <label class="control-label" id="bcs">影厅类型</label>
+                            <div class="controls">
+                                <select name="hall_id">
+                                    <option value="-1">---请选择---</option>
+                                  {foreach name="halltype" item="row"}
+                                    <option value="{$row['id']}" {if condition="$row['id'] == $data['hall_id']"}selected{/if}>{$row['name']}</option>
+                                  {/foreach}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group" id="pic" >
+                          <label class="control-label">重新上传影店图片</label>
+                          <div class="controls">
+                            <input type="file" size="19" name="pic" value="">
+                            <!-- 隐藏域传递 原图片的 url 和 id -->
+                            <input type="hidden" name="opic" value="{$pic}">
+                            <input type="hidden" name="id" value="{$id}">
+                            <img src="{$pic}" alt="">
+                          </div>
+                        </div>
+
+                        <div class="control-group" id="address">
+                            <label class="control-label" id="divadderss">修改影店具体地址</label>
+                            <div class="controls">
+                                <textarea name="address" id="inp2">{$data['address']}</textarea><font size="3" id="ft2"></font>
+                            </div>
+                        </div>
+                        <div class="control-group" id="price">
+                            <label class="control-label" id="divadderss">最低电影单价</label>
+                            <div class="controls">
+                                <input type="text" name="price" id="inp3" value="{$data['price']}">
+                            </div>
+                        </div>
+                        <div class="control-group" id="phone">
+                            <label class="control-label" id="divadderss">联系电话</label>
+                            <div class="controls">
+                                <input type="text" name="phone" id="inp4" value="{$data['phone']}">
+                            </div>
+                        </div>
+                        <div class="form-actions" id="but">
+                            <input type="submit" value="提交" class="btn btn-success" id="butt">
+                            <input type="reset" value="重置" class="btn btn-info" id="reset">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{block name="title"}影城详情修改{/block}
+{/block}
+{block name="style2"}style="display:block"{/block}
+{block name="menu2"}open{/block}

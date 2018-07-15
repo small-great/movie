@@ -1,0 +1,54 @@
+{extend name="AdminPublic:public"}
+{block name="main"}
+<div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+   <a href="/adminlists/index" class="current">权限管理</a><a href="JavaScript:;" class="current">修改权限</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="widget-box">
+        <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+          <h5>修改权限</h5>
+        </div>
+        <div class="widget-content nopadding">
+          <form class="form-horizontal" action="/adminlists/update" method="post"  name="basic_validate" id="basic_validate" novalidate="novalidate">
+            <div class="control-group">
+              <label class="control-label">权限名</label>
+              <div class="controls">
+                <input type="text" name="name" id="name" value="{$node.name}">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">控制器</label>
+              <div class="controls">
+                <input type="text" name="mname" id="mname" value="{$node.mname}" placeholder="请输入英文组合">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" >方法</label>
+              <div class="controls">
+                <input type="text" name="aname" id="aname" value="{$node.aname}" placeholder="以get或者post开头的的英文">&nbsp;<span></span>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">状态</label>&nbsp;
+              <label class="radio" style="margin-left:35px;line-height:40px"><input type="radio" name="status" {if condition="$node.status==0"}checked{/if} id="status" style="margin-top:14px" value="0">启用</label>
+              <label class="radio" style="margin-left:35px;line-height:40px"><input type="radio" name="status" {if condition="$node.status==1"}checked{/if} id="status" style="margin-top:14px" value="1">禁用</label>
+            </div>
+            <div class="form-actions">
+              <input type="hidden" name="id" value="{$node.id}">
+              <input type="submit" value="提交" class="btn btn-success">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block}
+{block name="title"}修改权限{/block}
+{block name="style"}style="display:block"{/block}
+{block name="menu"}open{/block}

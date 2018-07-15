@@ -1,0 +1,119 @@
+{extend name="AdminPublic:public"/}
+{block name="main"}
+  <script>
+  cid = "c_2yzd0xp5";
+  ci = 20;
+  window.system = {"seatsPrice":{"1":{"expression":"","price":""}}};
+  window.openPlatform = '';
+  </script>
+ <!--  <link rel="stylesheet" href="/static/homes/css/common.4b838ec3.css"/> -->
+<link rel="stylesheet" href="/static/homes/css/cinemas-seat.d66e64ba.css"/>
+  <script src="/static/homes/js/stat.791ffac0.js"></script>
+  <style>
+    .col-id{margin:5px 15px;font-size:16px}
+    .row-id{margin:7px 0;margin-right:20px !important;margin-bottom:0;}
+    .seats-wrapper .row{margin-bottom:0;}
+    .seat{cursor:pointer;}
+    .seats-wrapper input{width:20px;height:30px;display:inline-block;position:relative;left:22px;bottom:15px;}
+  </style>
+ <div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i>首页</a>
+   <a href="/relss/list" class="current">场次管理</a><a href="/relss/add" class="current">场次添加</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="widget-box">
+        <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+          <h5>添加场次</h5>
+        </div>
+        <div class="widget-content">
+          <form class="form-horizontal" method="post" action="/relss/insert" name="basic_validate" id="basic_validate" novalidate="novalidate">
+           <div class="control-group">
+              <label class="control-label">日期设置</label>
+              <div class="controls">
+                <input class="Wdate" type="text" id="d15" onclick="WdatePicker({skin:'default',minDate:'%y-%M-%d'})" name="day" />
+              </div>
+            </div>
+
+
+            <div class="control-group">
+              <label class="control-label">场次时间</label>
+              <div class="controls">
+                <input type="text" name="start_time" onclick="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" class="Wdate">——
+                <input type="text" name="end_time" onclick="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" class="Wdate">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">影城</label>
+              <div class="controls">
+                 <select name="cid" id="">
+                   <option value="0" class="please">--请选择--</option>
+                   {foreach name="cinema" item="row"}
+                   <option value="{$row['id']}">{$row['name']}</option>
+                   {/foreach}
+                 </select>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">电影名称</label>
+              <div class="controls">
+                <input type="text" name="mid" id="movie" placeholder="输入电影的中文名称或者英文名称"><br>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">放映厅</label>
+              <div class="controls">
+                 <select name="hid">
+                   <option value="0">--请选择--</option>
+                   {foreach name="$hall" item="row"}
+                   <option value="{$row.id}">{$row.hallname}</option>
+                   {/foreach}
+                 </select>
+              </div>
+            </div>
+            <div class="form-actions">
+              <input type="submit" value="提交" class="btn btn-success">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/static/admins/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admins/lib/layer/2.4/layer.js"></script>
+<script>
+  $('.please').attr('disabled',true);
+  $("#movie").blur(function(){
+    m = $(this).val();
+    obj = $(this);
+    $.get("/information/select",{m:m},function(data){
+      if(data){
+        if(data['code']==0){
+          layer.msg(data['msg'],{icon:2,time:3000});
+        }else if(data == "2"){
+          layer.msg("没有相关电影资源,请输入其他名称",{icon:2,time:3000});
+        }else{
+          obj.after("<br><span>请选择以下相关电影</span><br>");
+          for(var i=0;i<data.length;i++){
+            inp = $("<label style='display:inline-block;'><input type='radio' name='mid' value='"+data[i].id+"' style='margin:0;'><span style='margin:0 10px 0 0;'>"+data[i].ch_name+"</span></label>");
+            obj.next("br").next("span").next("br").after(inp);
+          }
+        }
+      }else{
+        layer.msg('请输入电影的中文名称或者英文名称!',{icon: 5,time:3000});
+      }
+    });
+  })
+  //获取焦点 删除之前失去焦点添加的内容
+  $("#movie").focus(function(){
+    $(this).nextAll().remove();
+  });
+</script>
+{/block}
+{block name="title"}场次添加{/block}
+{block name="style2"}style="display:block"{/block}
+{block name="menu2"}open{/block}

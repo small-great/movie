@@ -1,0 +1,167 @@
+{extend name="AdminPublic:public"/}
+{block name="main"}
+<script src="/static/admins/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admins/lib/layer/2.4/layer.js"></script>
+<style>.table td{text-align:center;}.iradio-blue{line-height:50px} #box{display: none;margin-left: 45px}</style>
+  <div id="content-header">
+    <div id="breadcrumb">
+     <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+     <a href="/cinema/index" class="current">影院管理</a><a href="/cinema/halltype" class="current">放映厅类型管理</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+    </div>
+   </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+              <h5>放映厅类型管理</h5>
+            </div>
+            <div class="widget-content nopadding">
+
+              <div class="form-horizontal">
+                  <div class="control-group">
+                      <label class="control-label">品牌/影店</label>
+                      <div class="controls">
+                          <select name="pid"  id="opbrand">
+                              <option value="-1" class="please">---请选择---</option>
+                            {foreach name="brand" item="row"}
+                              <option value="{$row['id']}">{$row['brand']}</option>
+                            {/foreach}
+                          </select>
+                      </div>
+                  </div>
+
+                  <div class="control-group">
+                      <label class="control-label">影厅类型</label>
+                      <div class="controls">
+                          <select name="pid"  id="halltype">
+                              <option value="-1" class="please">---请选择---</option>
+                            {foreach name="halltype" item="row"}
+                              <option value="{$row['id']}">{$row['name']}</option>
+                            {/foreach}
+                          </select>
+                      </div>
+                  </div>
+
+
+                   <div class="form-actions">
+                      <input type="button" value="提交" class="btn btn-success" id="submit">
+                   </div>
+
+                  <div class="widget-box" id="cmv" style="display:none">
+                      <div class="widget-title"> <span class="icon">
+                        <div id="uniform-title-checkbox"><span>选择(用于修改影厅类型)</div>
+                        </span>
+                      </div>
+
+                      <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped with-check">
+                          <thead>
+                            <tr>
+                              <th><i class="icon-resize-vertical"></i></th>
+                              <th>ID</th>
+                              <th>Name</th>
+                              <th>Address</th>
+                              <th>Halltype</th>
+                              <th>Delete</th>
+                            </tr>
+                          </thead>
+                          <tbody id="tbody">
+
+                          </tbody>
+                        </table>
+                      </div>
+                  </div>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+
+      //禁止请选择选中
+     $('.please').attr('disabled',true);
+     $('#opbrand').live('change',function(){
+          obj = $(this);
+          id = obj.val();
+          $.get('/cinema/brandsea',{pid:id},function(data){
+            if(data){
+              if(data['code']==0){
+                layer.msg(data['msg'],{icon:2,time:3000});
+              }else{
+                $("#cmv").css("display","block");
+                var op = '';
+                for(var i=0;i<data.length;i++){
+                      op += '<tr><td><input type="checkbox" value="'+data[i].id+'"></td><td>'+data[i].id+'</td><td>'+data[i].name+'</td><td>'+data[i].address+'</td><td class="center ">'+data[i].hall_type+'</td><td><a href="/cinema/details/id/'+data[i].id+'" class="btn btn-mini btn-info"title="修改"><i class="icon icon-pencil"></i></a>&nbsp;&nbsp;<a href="JavaScript:void(0);"class="btn btn-mini btn-danger"delname="'+data[i].id+'" onclick="del('+data[i].id+')" title="删除"><i class="icon icon-remove"></i></a></td></tr>';
+                }
+                //console.log(op);
+                $("#tbody").html(op);
+              }
+            }
+      },'json');
+     });
+
+
+     //jq和ajax删除
+      function del(id){
+
+        //找到具体节点对象tr
+        ss=$("a[delname="+id+"]").parents("tr");
+
+        //layer插件
+        layer.confirm('确认要删除吗？',function(index){
+          //ajax交互数据 传入id
+          $.get("/cinema/areadel",{id:id},function(data){
+            //判断传回的数据
+            if(data){
+                ss.remove();
+                layer.msg('删除数据成功!',{icon: 1,time:2000});
+            } else {
+                 layer.msg('删除数据失败!',{icon:2,time:2000});
+            }
+            console.log(data);
+          });
+        });
+      }
+
+</script>
+
+<script>
+       $('#submit').click(function(){
+           hid = $('#halltype').val();
+           name = $('#halltype').find("option:selected").text();
+           //alert(id);
+           checkarr = [];
+           $(':checkbox').each(function(){
+              if ($(this).attr("checked")) {
+                id=$(this).val();
+                //alert(id);
+                checkarr.push(id);
+                $(this).parents("tr").find("td:eq(4)").html(name);
+                $(this).attr("checked",false);
+              }
+           });
+
+           $.get("/cinema/hall_details",{hall_id:hid,hall_type:name,arr:checkarr},function(data){
+                  if (data != '' || data != null) {
+                    alert('修改成功');
+                   } else {
+                    alert('修改失败');
+                   }
+                   //console.log(data);
+               });
+
+       });
+</script>
+
+{block name="title"}放映厅类型管理{/block}
+{/block}
+{block name="style2"}style="display:block"{/block}
+{block name="menu2"}open{/block}

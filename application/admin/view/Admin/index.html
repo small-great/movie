@@ -1,0 +1,28 @@
+{extend name="AdminPublic:public"/}
+{block name="main"}
+ <div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+<!--End-breadcrumbs-->
+<!--Chart-box-->
+<div class="container-fluid"  style="text-align:center" >
+  <h1>欢迎<span style="color:red;">{$Think.session.adminuser}</span>来到深蓝后台首页</h1>
+    <div class="row-fluid">
+      <div class="widget-box">
+        <div class="widget-title bg_lg"><span class="icon"><i class="icon-signal"></i></span>
+          <h5>网站首页</h5>
+        </div>
+        <div class="widget-content" style="height:350px;background:url('/static/admins/bgimg.jpg');background-size:100% 100%;">
+        </div>
+      </div>
+    </div>
+  </div>
+<!--End-Chart-box-->
+    <hr/>
+    <div class="row-fluid">
+
+    </div>
+{/block}
+{block name="title"}深蓝后台首页{/block}

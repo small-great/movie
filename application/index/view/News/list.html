@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>资讯</title>
+  <link rel="stylesheet" href="/static/homes/css/news-hotnews.a01df872.css"/>
+  <script src="/static/homes/public/js/jquery.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+</head>
+<body>
+{:widget("Publics/header")}
+<div class="container" id="app">
+  <div class="detail-container">
+    <div class="news-container">
+    {foreach name="data" item="row"}
+    <div class="news-box clearfix">
+      <a class="news-img" href="/newsinfo/id/{$row.id}"  data-act="news-click" data-val="{ newsid:40563 }"> <img src="{$row.pic}" alt="" /> </a>
+      <div class="news-content ">
+        <h4 class="news-header one-line"> <a href="/newsinfo/id/{$row.id}" data-act="news-click" data-val="{ newsid:40563 }">{$row.title}</a> </h4>
+        <div class="latestNews-text">
+        {$row.descr|mb_substr=0,60}...
+        </div>
+        <div class="info-container">
+          <span class="news-source">猫眼电影</span>
+          <span class="news-date">{$row.newstime|date="m-d",###}</span>
+          <span class="images-view-count view-count">{$row.hotnum}</span>
+        </div>
+      </div>
+    </div>
+    {/foreach}
+    </div>
+    <div id="pages" style="margin-left:300px">
+       {$data->appends($request)->render()}
+    </div>
+  </div>
+</div>
+{:widget("Publics/footer")}
+</body>
+<script src="/static/homes/js/news-hotnews.dcc7a8ef.js"></script>
+</html>

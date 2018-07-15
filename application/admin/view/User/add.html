@@ -1,0 +1,139 @@
+<!-- 模态框（Modal） -->
+<div class="modal fade " style="width:800px;display:none !important" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog " >
+		<div class="modal-content " >
+			<div class="modal-header ">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					用户管理
+				</h4>
+			</div>
+			<div class="modal-body">
+					<div class="widget-box">
+						<div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+							<h5>添加用户</h5>
+						</div>
+						<div class="widget-content nopadding">
+							<form class="form-horizontal" action="/user/insert" method="post"  name="basic_validate" id="basic_validate" novalidate="novalidate">
+								<div class="control-group">
+									<label class="control-label">用户名称</label>
+									<div class="controls">
+										<input type="text" name="username" id="name">
+										<span style="display:none;" id="s1"><i class="icon-exclamation-sign" style="color:red;">用户名不能为空</i></span>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">密  码</label>
+									<div class="controls">
+										<input type="password" name="password" id="password">
+										<span style="display:none;" id="s2"><i class="icon-exclamation-sign" style="color:red;">密码不能为空</i></span>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">确认密码</label>
+									<div class="controls">
+										<input type="password" name="repassword" id="repassword">
+										<span style="display:none;" id="s3"><i class="icon-exclamation-sign" style="color:red;">确认密码不能为空</i></span><span style="display:none;" id="s4"><i class="icon-exclamation-sign" style="color:red;">两次密码不一致</i></span>
+									</div>
+								</div>
+								<div class="form-actions">
+									<input type="submit" value="提交" class="btn btn-success" id="btn">
+								</div>
+							</form>
+						</div>
+					</div>
+			</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/static/admins/js/jquery.min.js"></script>
+<script type="text/javascript">
+	//设置开关
+	var kg=false;
+	var a=false;
+	var b=false;
+	var c=false;
+	var d=false;
+	//默认提交关闭
+	$("#btn").attr("disabled", true);
+	//验证用户名
+	$("#name").blur(function(){
+		if($('#name').val()==''){
+			$('#s1').css('display','block');
+			kg=false;
+			a=false;		
+		}else{
+			$('#s1').css('display','none');
+			a=true;
+		}
+
+		if(a&&b&&c&&d){
+			$("#btn").attr("disabled", false);
+		}else{
+			$("#btn").attr("disabled", true);
+		}
+	});
+
+	//验证密码
+	$("#password").blur(function(){
+		if($('#password').val()==''){
+			$('#s2').css('display','block');
+			kg=false;
+			b=false;	
+		}else{
+			$('#s2').css('display','none');
+			b=true;		
+		}
+
+		if($('#repassword').val()!=$('#password').val()){
+			// $('#s4').css('display','block');
+			kg=false;
+			d=false;
+		}else{
+			// $('#s4').css('display','none');
+			d=true;		
+		}
+
+		if(a&&b&&c&&d){
+			$("#btn").attr("disabled", false);
+		}else{
+			$("#btn").attr("disabled", true);
+		}
+	});
+
+	//验证密码
+	$("#repassword").blur(function(){
+		if($('#repassword').val()==''){
+			$('#s3').css('display','block');
+			kg=false;
+			c=false;
+		}else{
+			$('#s3').css('display','none');	
+			c=true;	
+		}
+
+		if($('#repassword').val()!=$('#password').val()){
+			$('#s4').css('display','block');
+			kg=false;
+			d=false;
+		}else{
+			$('#s4').css('display','none');
+			d=true;		
+		}
+
+		if(a&&b&&c&&d){
+			$("#btn").attr("disabled", false);
+		}else{
+			$("#btn").attr("disabled", true);
+		}
+
+	});
+
+</script>

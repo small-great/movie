@@ -1,0 +1,70 @@
+{extend name="AdminPublic:public"}
+{block name="main"}
+<div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+   <a href="/admin/list" class="current">用户管理</a><a href="JavaScript:;" class="current">修改用户名称和会员状态</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+<div class="container-fluid">
+  <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+            <h5>修改用户</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <form class="form-horizontal" method="post" action="/user/update" name="basic_validate" id="basic_validate" novalidate="novalidate">
+              <div class="control-group">
+                <label class="control-label">用户名称</label>
+                <div class="controls">
+                  <input type="text" name="name" id="name" value="{$data.username}">
+                  <input type="hidden" name="id" value="{$data.id}">
+                  <i class="icon-remove-sign" style="color:red;display:none;" id="check">用户名重复</i>
+                </div>
+              </div>
+                <div class="control-group">
+                  <label class="control-label" style="padding-top:10px;">会员状态</label>
+                    <label class="radio " style="margin-left:35px;line-height:40px"><input type="radio" name="status" id="ischange1" style="margin-top:14px" value="0" {if condition="$data.status==0"}checked{/if}>普通用户</label>
+                    <label class="radio " style="margin-left:35px;line-height:40px"><input type="radio" name="status" id="ischange2" style="margin-top:14px" value="1" {if condition="$data.status==1"}checked{/if}>VIP用户</label>
+                </div>
+              <div class="form-actions">
+                <input type="submit" value="提交" class="btn btn-success" id="btn">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/static/admins/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $('#name').blur(function(){
+       if($('#name').val()==''){
+            $('#btn').attr('disabled',true);
+       }else{
+            name=$('#name').val();
+            $.post("/user/check",{name:name},function(data){
+                if(data==1){
+                    $('#check').css('display','inline-block');
+                    $('#btn').attr('disabled',true);
+                }else{
+                    $('#check').css('display','none');
+                    $('#btn').attr('disabled',false);
+                }
+            });
+       }
+    });
+    $('#ischange1').change(function(){
+        $('#btn').attr('disabled',false);
+    });
+
+     $('#ischange2').change(function(){
+        $('#btn').attr('disabled',false);
+    });
+</script>
+{/block}
+{block name="title"}修改用户详情{/block}
+{block name="style1"}style="display:block"{/block}
+{block name="menu1"}open{/block}

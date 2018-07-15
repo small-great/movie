@@ -1,0 +1,37 @@
+<div class="footer" style="visibility: visible;">
+    <p class="friendly-links">
+      违法和不良信息举报电话: 4006018900
+      举报邮箱: jubao.shenlan@shenlan.com
+    </p>
+    <p class="friendly-links">
+        友情链接 :
+        {foreach name="links" item="row"}
+        {if condition="$row.k_type==0"}
+        <a href="{$row.url}" title="{$row.desc}">{$row.title}</a>
+        {else}
+        <a href="{$row.url}" title="{$row.desc}"><img src="{$row.k_pic}" width="50px" height="30px" alt=""></a>
+		{/if}
+        <span></span>
+        {/foreach}
+    </p>
+    <p>
+        &copy;2018
+        深蓝电影 shenlan.com
+        <a href="javascript:;" >粤ICP证160733号</a>
+        <a href="javascript:;" >粤ICP备16022489号-1</a>
+        粤公网安备 11010502030881号
+        <a href="javascript:;" >网络文化经营许可证</a>
+        <a href="javascript:;" >电子公告服务规则</a>
+    </p>
+    <p>广州深蓝文化传媒有限公司</p>
+</div>
+
+    <!--[if IE 8]><script src="/static/homes/js/es5-shim.bbad933f.js" ></script><![endif]-->
+    <!--[if IE 8]><script src="/static/homes/js/es5-sham.d6ea26f4.js" ></script><![endif]-->
+    <script src="/static/homes/public/js/jquery.js"></script>
+    <script src="/static/homes/public/js/bootstrap.js"></script>
+    <script src="/static/homes/public/js/city-picker.data.js"></script>
+    <script src="/static/homes/public/js/city-picker.js"></script>
+    <script src="/static/homes/public/js/main.js"></script>
+</body>
+</html>

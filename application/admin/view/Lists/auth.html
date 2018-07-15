@@ -1,0 +1,73 @@
+{extend name="AdminPublic:public"}
+{block name="main"}
+<style>
+  /*td{border:1px solid #fff;}*/
+</style>
+ <div id="content-header">
+  <div id="breadcrumb">
+   <a href="/admin/index" class="tip-bottom" data-original-title="去首页"><i class="icon-home"></i>首页</a>
+   <a href="/adminlists/index" class="current">权限管理</a><a href="JavaScript:;" class="current">分配权限</a><a href="javascript:history.go(-1)" class="current"><i class="icon-undo"></i>后退</a>
+  </div>
+ </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+            <h5>当前角色: <span style="color:blue">{$role.name}</span> 的权限信息</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <form class="form-horizontal" action="/adminlists/savelist" method="post" name="basic_validate" id="basic_validate" novalidate="novalidate">
+            <div class="control-group ">
+            <table class="table  text-left" style="background-color:#fff;">
+            <thead>
+              <tr>
+                <td colspan="4" style="text-align:left">最新添加权限:</td>
+              </tr>
+              {volist name="res" id="row" key="k"}
+              <tr>
+              {volist name="row" id="rows" key="kk" }
+                {if condition="$kk/5==1"}</tr><tr>{/if}
+                {if condition="$kk/9==1"}</tr><tr>{/if}
+                {if condition="$kk/13==1"}</tr><tr>{/if}
+                {if condition="$kk/17==1"}</tr><tr>{/if}
+                {if condition="$kk/21==1"}</tr><tr>{/if}
+                {if condition="!in_array($rows.id,$rnids)"}
+                <td class="span3" style="text-align:left;color:blue"><label class="checkbox"><input type="checkbox" name="nid[]" value="{$rows.id}">{$rows.name}</label></td>
+              {/if}
+              {/volist}
+              </tr>
+              {/volist}
+            </thead>
+            <tbody>
+            {volist name="res" id="row"}
+              <tr>
+              <td colspan="4" style="text-align:left"><label>控制器:<span style="color:red;font-size:16px">{$key}</span></label></td></tr><tr>
+              {volist name="row" id="rows" key="kk" }
+              {if condition="$kk/5==1"}</tr><tr>{/if}
+              {if condition="$kk/9==1"}</tr><tr>{/if}
+              {if condition="$kk/13==1"}</tr><tr>{/if}
+              {if condition="$kk/17==1"}</tr><tr>{/if}
+              {if condition="$kk/21==1"}</tr><tr>{/if}
+              <td class="span3" style="text-align:left;color:black" ><label class="checkbox"><input type="checkbox" name="nid[]" {if condition="in_array($rows.id,$rnids)"}checked{/if} value="{$rows.id}">{$rows.name}</label></td>
+              {/volist}
+              </tr>
+            {/volist}
+            </tbody>
+            </table>
+            </div>
+              <div class="form-actions">
+                <input type="hidden" value="{$role.id}" name="rid" class="btn btn-success">
+                <input type="submit" value="保存权限" class="btn btn-success">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block}
+{block name="title"}分配权限{/block}
+{block name="style"}style="display:block"{/block}
+{block name="menu"}open{/block}
